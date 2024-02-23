@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Box
 {
+    private List<BoltColumn> _boltColumns = new();
     private int _countLines = 6;
     private BoltSpawner _spawner;
-    private Dictionary<Vector3, List<Bolt>> _bolts = new();
 
     public Box(BoltSpawner boltSpawner, int countLines)
     {
@@ -17,32 +17,30 @@ public class Box
         _countLines = countLines;
     }
 
-    public event Action<KeyValuePair<Vector3, List<Bolt>>> ListBoltsCreated;
+    public event Action<BoltColumn> BoltsDrawed;
 
     public void Initialize(SpawnPoints spawnPoints)
     {
-        Vector3[] _points = spawnPoints.GetPoints();
+        Transform[] _points = spawnPoints.GetPoints();
 
-        foreach (var item in _points)
-            _bolts.Add(item, new List<Bolt>());
+        foreach (var point in _points)
+            _boltColumns.Add(new BoltColumn(point));
 
         CreatBolts();
     }
 
     private void CreatBolts()
     {
-        foreach (var item in _bolts)
+        foreach (var item in _boltColumns)
         {
-            List<Bolt> bolts = item.Value;
-
-            while (bolts.Count < _countLines)
+            while (item.Count < _countLines)
             {
-                Bolt bolt = _spawner.GetBolt(item.Key);
+                Bolt bolt = _spawner.GetBolt(item.Position);
                 bolt.Pressed += OnPressed;
-                bolts.Insert(0, bolt);
+                item.AddBolt(bolt);
             }
 
-            ListBoltsCreated?.Invoke(item);   //  BoxView
+            BoltsDrawed?.Invoke(item);   //  BoxView
         }
 
         ActivateBoltInteractions();
@@ -52,21 +50,20 @@ public class Box
     {
         bolt.Pressed -= OnPressed;
 
-        if (_bolts.ContainsKey(bolt.Parent))
+        foreach (var item in _boltColumns)
         {
-            List<Bolt> bolts = _bolts[bolt.Parent];
-            bolts.RemoveAt(bolts.Count - 1);
-
-            CreatBolts();
+            if (item.TryDeleteBolt(bolt))
+            {
+                item.DeleteBolt();
+                CreatBolts();
+                return;
+            }
         }
     }
 
     private void ActivateBoltInteractions()
     {
-        foreach (var item in _bolts)
-        {
-            List<Bolt> bolts = item.Value;
-            bolts[bolts.Count - 1].Enable();
-        }
+        foreach (var item in _boltColumns)
+            item.ActivateBolt();
     }
 }

@@ -10,18 +10,18 @@ public class BoxView
         _offset = offset;
     }
 
-    public void Subscribe(Box box) => box.ListBoltsCreated += OnBoltsCreated;
+    public void Subscribe(Box box) => box.BoltsDrawed += OnBoltsDrawed;
 
-    public void Unsubscribe(Box box) => box.ListBoltsCreated -= OnBoltsCreated;
+    public void Unsubscribe(Box box) => box.BoltsDrawed -= OnBoltsDrawed;
 
-    private void OnBoltsCreated(KeyValuePair<Vector3, List<Bolt>> bolts)
+    private void OnBoltsDrawed(BoltColumn boltColumn)
     {
-        List<Bolt> newBolts = bolts.Value;
+        List<Transform> transforms = boltColumn.GetPositionBolts();
         Vector3 _boltOffset = Vector3.zero;
 
-        for (int i = 0; i < newBolts.Count; i++)
+        for (int i = transforms.Count - 1; i >= 0; i--)
         {
-            newBolts[i].transform.position = bolts.Key + _boltOffset;
+            transforms[i].position = boltColumn.Position + _boltOffset;
             _boltOffset.z -= _offset;
         }
     }

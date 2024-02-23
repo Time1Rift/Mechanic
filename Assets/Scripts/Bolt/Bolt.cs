@@ -10,7 +10,6 @@ public class Bolt : MonoBehaviour
 
     private BoltInteractionHandler _interactionHandler;
 
-    public Vector3 Parent { get; private set; }
     public int Number { get; private set; }
 
     public event Action<Bolt> Pressed;
@@ -30,12 +29,11 @@ public class Bolt : MonoBehaviour
         _interactionHandler.Pressed -= OnPressed;
     }
 
-    public void Initialize(int number, Color material, Vector3 parent)
+    public void Initialize(int number, Color material)
     {
         _numberText.text = number.ToString();
         _material.material.color = material;
         Number = number;
-        Parent = parent;
     }
 
     public void Enable() => _interactionHandler.Enable(true);

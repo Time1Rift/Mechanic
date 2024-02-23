@@ -14,12 +14,12 @@ public class SpawnPoints
         ArrangePoints();
     }
 
-    public Vector3[] GetPoints()
+    public Transform[] GetPoints()
     {
-        Vector3[] result = new Vector3[_points.Length];
+        Transform[] result = new Transform[_points.Length];
 
         for (int i = 0; i < result.Length; i++)
-            result[i] = _points[i].position;
+            result[i] = _points[i];
 
         return result;
     }

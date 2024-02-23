@@ -43,7 +43,7 @@ public class ShelfSorter
                 _spawner.PutObject(bolt);
             }
 
-            Bolt newBolt = _spawner.GetBolt(transform.position, duplicat.Key);
+            Bolt newBolt = _spawner.GetBolt(duplicat.Key);
             newBolt.transform.SetParent(transform);
             bolts.Add(newBolt);
 

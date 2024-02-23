@@ -18,12 +18,12 @@ public class BoltSpawner : ObjectPool<Bolt>
             throw new System.InvalidOperationException(nameof(_varietyBolts));
     }
 
-    public Bolt GetBolt(Vector3 parent, int number)
+    public Bolt GetBolt(int number)
     {
         VarietyBolt varietyBolt = _varietyBolts[number];
 
         Bolt newBolt = GetObject(_boltPrebab);
-        newBolt.Initialize(varietyBolt.Number, varietyBolt.Color, parent);
+        newBolt.Initialize(varietyBolt.Number, varietyBolt.Color);
         newBolt.gameObject.SetActive(true);
 
         BoltCreated?.Invoke(newBolt);
@@ -31,5 +31,5 @@ public class BoltSpawner : ObjectPool<Bolt>
         return newBolt;
     }
 
-    public Bolt GetBolt(Vector3 parent) => GetBolt(parent, Random.Range(0, _varietyBolts.Count));
+    public Bolt GetBolt(Vector3 parent) => GetBolt(Random.Range(0, _varietyBolts.Count));
 }
