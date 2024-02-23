@@ -1,15 +1,16 @@
 using UnityEngine;
 
-public class SpawnPoints : MonoBehaviour
+public class SpawnPoints
 {
-    [SerializeField, Min(0)] private float _offset = 1.1f;
-
     private Transform _transform;
     private Transform[] _points;
+    private float _offset;
 
-    private void Awake()
+    public SpawnPoints(Transform transform, float offset)
     {
+        _offset = offset;
         _transform = transform;
+
         ArrangePoints();
     }
 

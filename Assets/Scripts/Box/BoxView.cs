@@ -1,27 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoltsDescent))]
-public class BoxView : MonoBehaviour
+public class BoxView
 {
-    [SerializeField, Min(0f)] private readonly float _offset = 1f;
+    private float _offset;
 
-    private BoltsDescent _boltsDescent;
-
-    private void Awake()
+    public BoxView(float offset)
     {
-        _boltsDescent = GetComponent<BoltsDescent>();
+        _offset = offset;
     }
 
-    private void OnEnable()
-    {
-        _boltsDescent.BoltsCreated += OnBoltsCreated;
-    }
+    public void Subscribe(Box box) => box.ListBoltsCreated += OnBoltsCreated;
 
-    private void OnDisable()
-    {
-        _boltsDescent.BoltsCreated -= OnBoltsCreated;
-    }
+    public void Unsubscribe(Box box) => box.ListBoltsCreated -= OnBoltsCreated;
 
     private void OnBoltsCreated(KeyValuePair<Vector3, List<Bolt>> bolts)
     {
