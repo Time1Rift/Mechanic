@@ -6,13 +6,13 @@ public class Shelf
 {
     private List<Bolt> _bolts = new();
     private Transform _transform;
-    private ShelfSorter _shelfSorter;
+    private ShelfConnector _shelfConnector;
     private int _maxBolts;
 
-    public Shelf(Transform transform, ShelfSorter shelfSorter, int maxBolts)
+    public Shelf(Transform transform, ShelfConnector shelfConnector, int maxBolts)
     {
         _transform = transform;
-        _shelfSorter = shelfSorter;
+        _shelfConnector = shelfConnector;
         _maxBolts = maxBolts;
     }
 
@@ -26,13 +26,17 @@ public class Shelf
         bolt.Pressed -= OnPressed;
 
         _bolts.Add(bolt);
-        bolt.transform.SetParent(_transform);
-        BoltsDrawed?.Invoke(bolt.transform, _bolts.Count);
+        Transform transformBolt = bolt.transform;
+        transformBolt.SetParent(_transform);
+        BoltsDrawed?.Invoke(transformBolt, _bolts.Count);
 
-        _shelfSorter.CanNumber(_bolts);
-        _shelfSorter.FoldBolts(_bolts, _transform);
+        _shelfConnector.TryRemove(bolt, _bolts);
+        _shelfConnector.FoldBolts(_bolts, _transform);
 
         if (_bolts.Count == _maxBolts)
+        {
             Losed?.Invoke();
+            Debug.Log("Los");
+        }
     }
 }

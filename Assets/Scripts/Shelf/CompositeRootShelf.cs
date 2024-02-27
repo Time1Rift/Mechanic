@@ -7,17 +7,16 @@ public class CompositeRootShelf : MonoBehaviour
     [SerializeField, Min(0)] private int _maxBolts = 5;
     [SerializeField, Min(0)] private int _countBoltsAddition = 3;
     [SerializeField] private BoltSpawner _spawner;
-    [SerializeField] private Construction _construction;                //      не забыть это убрать 
 
     private ShelfView _shelfView;
     private Shelf _shelf;
-    private ShelfSorter _shelfSorter;
+    private ShelfConnector _shelfConnector;
 
     private void Awake()
     {
         _shelfView = new ShelfView(_offset, _transform);
-        _shelfSorter = new ShelfSorter(_countBoltsAddition, _construction, _spawner);
-        _shelf = new Shelf(_transform, _shelfSorter, _maxBolts);
+        _shelfConnector = new ShelfConnector(_countBoltsAddition, _spawner);
+        _shelf = new Shelf(_transform, _shelfConnector, _maxBolts);
     }
 
     private void OnEnable()
