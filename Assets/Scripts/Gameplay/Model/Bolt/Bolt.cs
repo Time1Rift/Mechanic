@@ -6,7 +6,7 @@ using UnityEngine;
 public class Bolt : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _numberText;
-    [SerializeField] private MeshRenderer _material;
+    [SerializeField] private MeshFilter _mesh;
 
     private BoltInteractionHandler _interactionHandler;
 
@@ -31,11 +31,11 @@ public class Bolt : MonoBehaviour
         _interactionHandler.Pressed -= OnPressed;
     }
 
-    public void Initialize(int number, Color material)
+    public void Initialize(int number, Mesh mesh)
     {
         _numberText.text = number.ToString();
         _numberText.enabled = true;
-        _material.material.color = material;
+        _mesh.mesh = mesh;
         Number = number;
     }
 
@@ -43,7 +43,7 @@ public class Bolt : MonoBehaviour
 
     public void Relocate() => Postponed?.Invoke(this);
 
-    public void Enable() => _interactionHandler.Enable(true);
+    public void CanTrackClicks(bool isWorking) => _interactionHandler.CanTrackClicks(isWorking);
 
     private void OnPressed() => Pressed?.Invoke(this);
 }

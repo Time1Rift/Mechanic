@@ -1,19 +1,24 @@
-public class CompositeRootBox
+using UnityEngine;
+
+public class CompositeRootBox : MonoBehaviour
 {
+    [SerializeField] private BoxInfo _boxInfo;
+    [SerializeField] private BoltSpawner _boltSpawner;
+
     private BoxView _boxView;
     private Box _box;
     private SpawnPoints _spawnPoints;
 
-    public CompositeRootBox(BoxInfo boxInfo, BoltSpawner boltSpawner)
-    {
-        _spawnPoints = new SpawnPoints(boltSpawner.transform, boxInfo.OffsetColumns);
-        _box = new Box(boltSpawner, boxInfo.CountLines);
-        _boxView = new BoxView(boxInfo.OffsetLines);
-    }
-
-    public void Start()
+    private void Start()
     {
         _box.Initialize(_spawnPoints);
+    }
+
+    public void Initialize()
+    {
+        _spawnPoints = new SpawnPoints(_boltSpawner.transform, _boxInfo.OffsetColumns);
+        _box = new Box(_boltSpawner, _boxInfo.CountLines);
+        _boxView = new BoxView(_boxInfo.OffsetLines);
     }
 
     public void Enable()
@@ -25,4 +30,6 @@ public class CompositeRootBox
     {
         _boxView.Unsubscribe(_box);
     }
+
+    public void CanTrackClicks(bool isWorking) => _box.CanTrackClicks(isWorking);
 }

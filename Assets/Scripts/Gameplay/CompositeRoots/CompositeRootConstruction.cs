@@ -1,30 +1,49 @@
-public class CompositeRootConstruction
+using UnityEngine;
+
+public class CompositeRootConstruction : MonoBehaviour
 {
+    [SerializeField] private ConstructionViewInfo _constructionViewInfo;
+    [SerializeField] private Constructions _prefabs;
+    [SerializeField] private BoltSpawner _boltSpawner;
+
     private ConstructionView _view;
     private Construction _construction;
 
-    public CompositeRootConstruction(ConstructionPrefab prefab)
-    {
-        _view = new ConstructionView(prefab.RectTransform, prefab.NumberText);
-        _construction = new Construction(prefab.Model, _view);
-    }
-
-    public void Start()
+    private void Start()
     {
         _construction.SetDetail();
     }
 
-    public void Enable(IBoltCreated boltSpawner)
+    public void Initialize()
     {
-        boltSpawner.BoltCreated += OnBoltCreated;
+        ConstructionPrefab prefab = GetPrefab();
+        _view = new ConstructionView(prefab.Transform, prefab.NumberText, _constructionViewInfo);
+        _construction = new Construction(prefab.Model, _view);
     }
 
-    public void Disable(IBoltCreated boltSpawner)
+    public void Enable()
     {
-        boltSpawner.BoltCreated -= OnBoltCreated;
+        _boltSpawner.BoltCreated += OnBoltCreated;
+        _boltSpawner.Unsubscribed += OnUnsubscribe;
+    }
+
+    public void Disable()
+    {
+        _boltSpawner.BoltCreated -= OnBoltCreated;
+        _boltSpawner.Unsubscribed -= OnUnsubscribe;
     }
 
     public IWin GetIWin() => _construction;
 
     private void OnBoltCreated(Bolt bolt) => _construction.Subscribe(bolt);
+
+    private void OnUnsubscribe(Bolt bolt) => _construction.Unsubscribe(bolt);
+
+    private ConstructionPrefab GetPrefab()
+    {
+        if (PlayerPrefs.HasKey("CountConstructions") == false)
+            PlayerPrefs.SetInt("CountConstructions", _prefabs.Count);
+
+        return Instantiate(_prefabs.CountConstruction[Random.Range(0, PlayerPrefs.GetInt("CountConstructions"))]);
+    }
 }

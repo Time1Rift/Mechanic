@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c233f503fe15e45869752c6ef6f06d, type: 3}
   m_Name: BoxInfo
   m_EditorClassIdentifier: 
-  <OffsetLines>k__BackingField: 1
-  <CountLines>k__BackingField: 6
-  <BoltSpawner>k__BackingField: {fileID: 1307446985257385660, guid: 93ef5ceec076171428235fdf231fb80e, type: 3}
-  <OffsetColumns>k__BackingField: 1.1
-  SpawnPath: {fileID: 6045213780086579944, guid: 93ef5ceec076171428235fdf231fb80e, type: 3}
+  <OffsetLines>k__BackingField: 1.2
+  <CountLines>k__BackingField: 4
+  <OffsetColumns>k__BackingField: 1.2

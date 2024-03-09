@@ -7,6 +7,8 @@ public class BoltSpawner : ObjectPool<Bolt>, IBoltCreated
     [SerializeField] private List<VarietyBolt> _varietyBolts;
     [SerializeField] private Bolt _boltPrebab;
 
+    private Bolt _newBolt;
+
     public event System.Action<Bolt> BoltCreated;
 
     private void OnValidate()
@@ -20,16 +22,13 @@ public class BoltSpawner : ObjectPool<Bolt>, IBoltCreated
 
     public Bolt GetBolt(int number)
     {
-        VarietyBolt varietyBolt = _varietyBolts[number];
+        _newBolt = GetObject(_boltPrebab);
+        _newBolt.Initialize(_varietyBolts[number].Number, _varietyBolts[number].Mesh);
+        _newBolt.gameObject.SetActive(true);
+        BoltCreated?.Invoke(_newBolt);
 
-        Bolt newBolt = GetObject(_boltPrebab);
-        newBolt.Initialize(varietyBolt.Number, varietyBolt.Color);
-        newBolt.gameObject.SetActive(true);
-
-        BoltCreated?.Invoke(newBolt);
-
-        return newBolt;
+        return _newBolt;
     }
 
-    public Bolt GetBolt(Vector3 parent) => GetBolt(Random.Range(0, _varietyBolts.Count));
+    public Bolt GetBolt() => GetBolt(Random.Range(0, _varietyBolts.Count));
 }

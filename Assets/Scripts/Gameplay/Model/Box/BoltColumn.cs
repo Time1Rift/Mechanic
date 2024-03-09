@@ -12,16 +12,21 @@ public class BoltColumn
     }
 
     public int Count => _bolts.Count;
-
     public Vector3 Position => _transform.position;
 
     public void AddBolt(Bolt bolt) => _bolts.Enqueue(bolt);
 
-    public void ActivateBolt() => _bolts.Peek().Enable();
+    public void CanTrackClicks(bool isWorking) => _bolts.Peek().CanTrackClicks(isWorking);
 
-    public bool TryDeleteBolt(Bolt bolt) => bolt == _bolts.Peek();
+    public bool TryDeleteBolt(Bolt bolt)
+    {
+        bool isDeleted = bolt == _bolts.Peek();
 
-    public void DeleteBolt() => _bolts.Dequeue();
+        if (isDeleted)
+            _bolts.Dequeue();
+
+        return isDeleted;
+    }
 
     public List<Transform> GetPositionBolts()
     {

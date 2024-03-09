@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6539f216cbd60174d9bc823dd4a95d5e, type: 3}
   m_Name: ShelfInfo
   m_EditorClassIdentifier: 
-  <Offset>k__BackingField: 1.1
-  <MaxBolts>k__BackingField: 5
   <CountBoltsAddition>k__BackingField: 3
+  <MaxBolts>k__BackingField: 5

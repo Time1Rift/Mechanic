@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Number 3
   m_EditorClassIdentifier: 
   <Number>k__BackingField: 3
-  <Color>k__BackingField: {r: 0.22899652, g: 1, b: 0, a: 0}
+  <Mesh>k__BackingField: {fileID: 78502409068488972, guid: 5655a25acd12cac44b0c4cbc3adb7a54, type: 3}

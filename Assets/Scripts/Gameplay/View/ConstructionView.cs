@@ -1,25 +1,28 @@
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
 
 public class ConstructionView
 {
-    private RectTransform _rectTransform;
+    private Transform _transform;
     private TextMeshProUGUI _numberText;
+    private float _durationMover;
 
-    public ConstructionView(RectTransform rectTransform, TextMeshProUGUI text)
+    public ConstructionView(Transform transform, TextMeshProUGUI text, ConstructionViewInfo _constructionViewInfo)
     {
-        _rectTransform = rectTransform;
+        _transform = transform;
         _numberText = text;
+        _durationMover = _constructionViewInfo.DurationMover;
     }
 
     public void Draw(Vector3 point, int number)
     {
-        _rectTransform.position = point;
+        _transform.position = point;
         _numberText.text = number.ToString();
     }
 
     public void DrawBolt(Transform bolt, Transform point)
     {
-        bolt.position = point.position;
+        bolt.DOPath(new Vector3[] { point.position }, _durationMover, PathType.CatmullRom);
     }
 }

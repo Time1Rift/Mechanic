@@ -1,45 +1,90 @@
-using System.Collections.Generic;
+using System;
 using System.Linq;
-using UnityEngine;
 
-public class ShelfConnector
+public class ShelfConnector : ILosed
 {
-    private int _countBoltsAddition;
-    private BoltSpawner _spawner;
+    private Shelf _shelf;
+    private ShelfInspector _shelfInspector;
+    private ShelfView _shelfView;
 
-    public ShelfConnector(int countBoltsAddition, BoltSpawner spawner)
+    private int _followingNumber;
+    private Bolt _newBolt;
+
+    public ShelfConnector(ShelfInspector shelfInspector, Shelf shelf, ShelfView shelfView)
     {
-        _spawner = spawner;
-        _countBoltsAddition = countBoltsAddition;
+        _shelf = shelf;
+        _shelfInspector = shelfInspector;
+        _shelfView = shelfView;
     }
 
-    public void TryRemove(Bolt bolt, List<Bolt> bolts)
+    public event Action Losed;
+
+    public void Enable()
     {
-        bolt.Relocate();
+        _shelfView.Moved += OnMoved;
+        _shelfView.Connected += ConnectBolts;
+        _shelfView.Pulsated += OnPulsated;
+    }
 
-        if (bolt.IsText == false)
-            bolts.Remove(bolt);
-    }    
-
-    public void FoldBolts(List<Bolt> bolts, Transform transform)
+    public void Disable()
     {
-        var itemsDuplicates = bolts.GroupBy(item => item.Number)
-            .Where(array => array.Count() == _countBoltsAddition)
-            .FirstOrDefault();
+        _shelfView.Moved -= OnMoved;
+        _shelfView.Connected -= ConnectBolts;
+        _shelfView.Pulsated -= OnPulsated;
+    }
 
-        if (itemsDuplicates != null)
+    public void Subscribe(Bolt bolt) => bolt.Pressed += OnPressed;
+
+    public void Unsubscribe(Bolt bolt) => bolt.Pressed -= OnPressed;
+
+    private void OnPressed(Bolt bolt)
+    {
+        bolt.Pressed -= OnPressed;
+        _shelfView.MoverBolt(bolt);
+    }
+
+    private void OnMoved(Bolt bolt)
+    {
+        TryRemove(bolt);
+        FoldBolts();
+        TryLosed();
+    }
+
+    private void TryRemove(Bolt bolt)
+    {
+        if (_shelfInspector.TryRemove(bolt))
+            _shelfView.RemoveBolt(bolt);
+        else
+            _shelf.AddBolt(bolt);
+    }
+
+    private void FoldBolts()
+    {
+        if (_shelfInspector.FoldBolts(_shelf.Bolts, out IGrouping<int, Bolt> duplicates))
         {
-            foreach (var bolt in itemsDuplicates)
-            {
-                bolts.Remove(bolt);
-                _spawner.PutObject(bolt);
-            }
+            _shelfView.ConnectBolts(duplicates);
+            _followingNumber = duplicates.Key;
 
-            Bolt newBolt = _spawner.GetBolt(itemsDuplicates.Key);
-            newBolt.transform.SetParent(transform);
-            bolts.Add(newBolt);
-            
-            TryRemove(newBolt, bolts);
+            foreach (var bolt in duplicates)
+                _shelf.Remove(bolt);
         }
+    }
+
+    private void ConnectBolts()
+    {
+        _newBolt = _shelf.GetBolt(_followingNumber);
+        _shelfView.Pulsate(_newBolt);
+    }
+
+    private void OnPulsated(Bolt bolt) 
+    {
+        TryRemove(bolt);
+        FoldBolts();
+    }
+
+    private void TryLosed()
+    {
+        if (_shelfInspector.TryLosed(_shelf.CountBolts))
+            Losed?.Invoke();
     }
 }

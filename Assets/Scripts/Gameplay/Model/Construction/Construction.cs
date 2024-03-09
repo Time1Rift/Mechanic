@@ -29,16 +29,18 @@ public class Construction : IWin
 
     public void Subscribe(Bolt bolt) => bolt.Postponed += OnPostponed;
 
+    public void Unsubscribe(Bolt bolt) => bolt.Postponed -= OnPostponed;
+
     private void OnPostponed(Bolt bolt)
     {
         bolt.Postponed -= OnPostponed;
 
         if (bolt.Number != _number)
             return;
-
-        bolt.DisableText();
+        
         Transform transform = bolt.transform;
         transform.SetParent(_point);
+        bolt.DisableText();
         _view.DrawBolt(transform, _point);
 
         TryGetPoint();
