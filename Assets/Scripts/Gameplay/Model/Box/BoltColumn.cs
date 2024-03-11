@@ -16,7 +16,7 @@ public class BoltColumn
 
     public void AddBolt(Bolt bolt) => _bolts.Enqueue(bolt);
 
-    public void CanTrackClicks(bool isWorking) => _bolts.Peek().CanTrackClicks(isWorking);
+    public void ActivateClick() => _bolts.Peek().ActivateClick();
 
     public bool TryDeleteBolt(Bolt bolt)
     {
@@ -33,7 +33,7 @@ public class BoltColumn
         List<Transform> transforms = new();
 
         foreach (var bolt in _bolts)
-            transforms.Add(bolt.transform);
+            transforms.Add(bolt.Transform);
 
         return transforms;
     }

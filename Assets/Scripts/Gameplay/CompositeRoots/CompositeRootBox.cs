@@ -30,6 +30,4 @@ public class CompositeRootBox : MonoBehaviour
     {
         _boxView.Unsubscribe(_box);
     }
-
-    public void CanTrackClicks(bool isWorking) => _box.CanTrackClicks(isWorking);
 }

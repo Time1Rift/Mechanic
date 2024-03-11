@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using UnityEngine;
 
 public class ShelfConnector : ILosed
 {
@@ -39,7 +40,11 @@ public class ShelfConnector : ILosed
 
     private void OnPressed(Bolt bolt)
     {
-        bolt.Pressed -= OnPressed;
+        if (_shelf.IsShelfFull)
+            return;
+
+        Unsubscribe(bolt);
+        _shelf.AddBolt(bolt);
         _shelfView.MoverBolt(bolt);
     }
 
@@ -53,30 +58,33 @@ public class ShelfConnector : ILosed
     private void TryRemove(Bolt bolt)
     {
         if (_shelfInspector.TryRemove(bolt))
+        {
+            _shelf.Remove(bolt);
             _shelfView.RemoveBolt(bolt);
-        else
-            _shelf.AddBolt(bolt);
+        }
     }
 
     private void FoldBolts()
     {
         if (_shelfInspector.FoldBolts(_shelf.Bolts, out IGrouping<int, Bolt> duplicates))
         {
-            _shelfView.ConnectBolts(duplicates);
-            _followingNumber = duplicates.Key;
-
             foreach (var bolt in duplicates)
                 _shelf.Remove(bolt);
+
+            _followingNumber = duplicates.Key;
+            _shelfView.ConnectBolts(duplicates);
         }
     }
 
     private void ConnectBolts()
     {
         _newBolt = _shelf.GetBolt(_followingNumber);
-        _shelfView.Pulsate(_newBolt);
+        Unsubscribe(_newBolt);
+        _shelf.AddBolt(_newBolt);
+        _shelfView.Pulsate(_newBolt);        
     }
 
-    private void OnPulsated(Bolt bolt) 
+    private void OnPulsated(Bolt bolt)
     {
         TryRemove(bolt);
         FoldBolts();

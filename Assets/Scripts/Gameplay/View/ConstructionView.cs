@@ -1,23 +1,51 @@
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using System.Drawing;
 
 public class ConstructionView
 {
-    private Transform _transform;
+    private Transform _preview;
     private TextMeshProUGUI _numberText;
     private float _durationMover;
 
-    public ConstructionView(Transform transform, TextMeshProUGUI text, ConstructionViewInfo _constructionViewInfo)
+    private Transform _transformCamera;
+    private Vector3 _positionIndentation;
+    private float _moveDuration;
+    private Vector3 _sesignReviewPosition;
+    private Vector3 _curentPosition;
+
+    public ConstructionView(Transform preview, TextMeshProUGUI text, ConstructionViewInfo _constructionViewInfo)
     {
-        _transform = transform;
+        _preview = preview;
         _numberText = text;
         _durationMover = _constructionViewInfo.DurationMover;
+        _positionIndentation = _constructionViewInfo.PositionIndentation;
+        _moveDuration = _constructionViewInfo.MoveDuration;
+        _sesignReviewPosition = _constructionViewInfo.SesignReviewPosition;
+        _transformCamera = Camera.main.transform;
     }
 
-    public void Draw(Vector3 point, int number)
+    public void ShowEntireStructure(bool isWorking)
     {
-        _transform.position = point;
+        if (isWorking)
+            _transformCamera.DOMove(_curentPosition, _moveDuration).SetDelay(_moveDuration);
+        else
+            _transformCamera.DOMove(_sesignReviewPosition, _moveDuration).SetDelay(_moveDuration);
+    }
+
+    public void RemovePreview() => _preview.gameObject.SetActive(false);
+
+    public void MoveCamera(Vector3 point)
+    {
+        point += _positionIndentation;
+        _transformCamera.DOMove(point, _moveDuration).SetDelay(_moveDuration);
+        _curentPosition = point;
+    }
+
+    public void DrawPreview(Vector3 point, int number)
+    {
+        _preview.position = point;
         _numberText.text = number.ToString();
     }
 

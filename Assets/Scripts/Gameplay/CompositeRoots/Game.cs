@@ -7,6 +7,9 @@ public class Game : MonoBehaviour
     [SerializeField] private CompositeRootShelf _shelf;
     [SerializeField] private CompositeRootConstruction _construction;
 
+    [SerializeField] private GameObject _shelfObject;
+    [SerializeField] private GameObject _boxObject;
+
     private void Awake()
     {
         _gameplayUI.Initialize();
@@ -55,5 +58,10 @@ public class Game : MonoBehaviour
         OnPressed(false);
     }
 
-    private void OnPressed(bool isWorking) => _box.CanTrackClicks(isWorking);
+    private void OnPressed(bool isWorking)
+    {
+        _construction.ShowEntireStructure(isWorking);
+        _shelfObject.SetActive(isWorking);
+        _boxObject.SetActive(isWorking);
+    }
 }

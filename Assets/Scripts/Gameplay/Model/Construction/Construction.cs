@@ -38,10 +38,9 @@ public class Construction : IWin
         if (bolt.Number != _number)
             return;
         
-        Transform transform = bolt.transform;
-        transform.SetParent(_point);
+        bolt.Transform.SetParent(_point);
         bolt.DisableText();
-        _view.DrawBolt(transform, _point);
+        _view.DrawBolt(bolt.Transform, _point);
 
         TryGetPoint();
     }
@@ -55,9 +54,14 @@ public class Construction : IWin
         }
 
         if (_details.Count == 0)
+        {
+            _view.RemovePreview();
             Win?.Invoke();
+        }
         else
+        {
             SetDetail();
+        }
     }
 
     private void SetPoint()
@@ -65,6 +69,7 @@ public class Construction : IWin
         _point = _detail.GetPoint();
         _number = _detail.Number;
 
-        _view.Draw(_point.position, _number);
+        _view.MoveCamera(_point.position);
+        _view.DrawPreview(_point.position, _number);
     }
 }

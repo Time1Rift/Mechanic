@@ -7,7 +7,6 @@ public class Box : IBoltsDrawed
     private List<BoltColumn> _boltColumns = new();
     private int _countLines = 6;
     private BoltSpawner _spawner;
-    private bool _isTrackClicks = true;
 
     public Box(BoltSpawner boltSpawner, int countLines)
     {
@@ -27,16 +26,10 @@ public class Box : IBoltsDrawed
         CreatBolts();
     }
 
-    public void CanTrackClicks(bool isTrackClicks)
-    {
-        _isTrackClicks = isTrackClicks;
-        CanTrackClicks();
-    }
-
-    private void CanTrackClicks()
+    private void ActivateClick()
     {
         foreach (var item in _boltColumns)
-            item.CanTrackClicks(_isTrackClicks);
+            item.ActivateClick();
     }
 
     private void CreatBolts()
@@ -53,8 +46,7 @@ public class Box : IBoltsDrawed
             BoltsDrawed?.Invoke(item);   //  BoxView
         }
 
-        if (_isTrackClicks)
-            CanTrackClicks();
+        ActivateClick();
     }
 
     private void OnPressed(Bolt bolt)

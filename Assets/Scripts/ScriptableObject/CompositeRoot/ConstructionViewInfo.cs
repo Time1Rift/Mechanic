@@ -4,4 +4,7 @@ using UnityEngine;
 public class ConstructionViewInfo : ScriptableObject
 {
     [field: SerializeField, Min(0f)] public float DurationMover { get; private set; } = 0.6f;
+    [field: SerializeField, Min(0f)] public float MoveDuration { get; private set; } = 0.6f;
+    [field: SerializeField] public Vector3 PositionIndentation { get; private set; }
+    [field: SerializeField] public Vector3 SesignReviewPosition { get; private set; }
 }

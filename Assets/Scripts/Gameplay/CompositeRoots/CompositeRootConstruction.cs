@@ -17,7 +17,7 @@ public class CompositeRootConstruction : MonoBehaviour
     public void Initialize()
     {
         ConstructionPrefab prefab = GetPrefab();
-        _view = new ConstructionView(prefab.Transform, prefab.NumberText, _constructionViewInfo);
+        _view = new ConstructionView(prefab.Preview, prefab.NumberText, _constructionViewInfo);
         _construction = new Construction(prefab.Model, _view);
     }
 
@@ -34,6 +34,8 @@ public class CompositeRootConstruction : MonoBehaviour
     }
 
     public IWin GetIWin() => _construction;
+
+    public void ShowEntireStructure(bool isWorking) => _view.ShowEntireStructure(isWorking);
 
     private void OnBoltCreated(Bolt bolt) => _construction.Subscribe(bolt);
 

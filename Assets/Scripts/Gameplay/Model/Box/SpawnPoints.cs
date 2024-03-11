@@ -10,7 +10,7 @@ public class SpawnPoints
     {
         _offset = offset;
         _transform = transform;
-
+        
         ArrangePoints();
     }
 

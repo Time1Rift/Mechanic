@@ -4,15 +4,16 @@ using UnityEngine;
 public class Shelf
 {
     private List<Bolt> _bolts = new();
-    private Transform _transform;
     private BoltSpawner _spawner;
+    private int _maxBolts;
 
-    public Shelf(Transform transform, BoltSpawner spawner)
+    public Shelf(BoltSpawner spawner, int maxBolts)
     {
-        _transform = transform;
         _spawner = spawner;
+        _maxBolts = maxBolts;
     }
 
+    public bool IsShelfFull => _bolts.Count == _maxBolts;
     public int CountBolts => _bolts.Count;
     public IReadOnlyList<Bolt> Bolts => _bolts;
 
@@ -31,11 +32,7 @@ public class Shelf
         _bolts.Clear();
     }
 
-    public void AddBolt(Bolt bolt)
-    {
-        _bolts.Add(bolt);
-        bolt.transform.SetParent(_transform);
-    }
+    public void AddBolt(Bolt bolt) => _bolts.Add(bolt);
 
     public Bolt GetBolt(int number) => _spawner.GetBolt(number);
 }

@@ -453,7 +453,7 @@ GameObject:
   - component: {fileID: 9174113912411343754}
   - component: {fileID: 5903252469432885416}
   m_Layer: 0
-  m_Name: Construction 3
+  m_Name: Test 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

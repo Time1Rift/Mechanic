@@ -13,15 +13,10 @@ public class CompositeRootShelf : MonoBehaviour
     private ShelfInspector _shelfInspector;
     private Shelf _shelf;
 
-    private void Update()
-    {
-        _shelfView.Update(Time.deltaTime);
-    }
-
     public void Initialize()
     {
-        _shelf = new Shelf(_shelTransform, _spawner);
-        _shelfView = new ShelfView(_shelfViewInfo, _shelTransform, _shelfInfo.MaxBolts, _shelf);
+        _shelf = new Shelf(_spawner, _shelfInfo.MaxBolts);
+        _shelfView = new ShelfView(_shelfViewInfo, _shelTransform, _shelf);
         _shelfInspector = new ShelfInspector(_shelfInfo.CountBoltsAddition, _shelfInfo.MaxBolts);
         _shelfConnector = new ShelfConnector(_shelfInspector, _shelf, _shelfView);
     }

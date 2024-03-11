@@ -16,5 +16,5 @@ public class BoltInteractionHandler : MonoBehaviour
         _isEnable = false;
     }
 
-    public void CanTrackClicks(bool isEnable) => _isEnable = isEnable;
+    public void ActivateClick() => _isEnable = true;
 }

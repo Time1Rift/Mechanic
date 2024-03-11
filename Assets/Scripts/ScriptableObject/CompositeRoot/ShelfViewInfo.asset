@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f46612ff80d63e14f82b59f37c468b82, type: 3}
   m_Name: ShelfViewInfo
   m_EditorClassIdentifier: 
-  <Offset>k__BackingField: 1.1
-  <DurationMover>k__BackingField: 0.2
-  <DurationConnected>k__BackingField: 0.2
-  <DurationScale>k__BackingField: 0.1
+  <Offset>k__BackingField: 1.7
+  <DurationMover>k__BackingField: 0.18
+  <DurationConnected>k__BackingField: 0.18
+  <DurationScale>k__BackingField: 0.08
   <MaxScale>k__BackingField: 0.8
   <MinScale>k__BackingField: 1.2
