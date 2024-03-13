@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c233f503fe15e45869752c6ef6f06d, type: 3}
   m_Name: BoxInfo
   m_EditorClassIdentifier: 
-  <OffsetLines>k__BackingField: 1.2
-  <CountLines>k__BackingField: 4
-  <OffsetColumns>k__BackingField: 1.2
+  <OffsetLines>k__BackingField: 1.05
+  <CountLines>k__BackingField: 6
+  <OffsetColumns>k__BackingField: 1.35

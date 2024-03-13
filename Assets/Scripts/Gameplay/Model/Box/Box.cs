@@ -16,9 +16,9 @@ public class Box : IBoltsDrawed
 
     public event Action<BoltColumn> BoltsDrawed;
 
-    public void Initialize(SpawnPoints spawnPoints)
+    public void Initialize(SpawnPoints spawnPoints, Transform transform)
     {
-        Transform[] _points = spawnPoints.GetPoints();
+        Transform[] _points = spawnPoints.GetPoints(transform);
 
         foreach (var point in _points)
             _boltColumns.Add(new BoltColumn(point));

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DurationMover>k__BackingField: 0.6
   <MoveDuration>k__BackingField: 0.3
-  <PositionIndentation>k__BackingField: {x: 0, y: 8, z: -12}
+  <DurationRotate>k__BackingField: 0.5
+  <PositionIndentation>k__BackingField: {x: 0, y: 12, z: -18}
   <SesignReviewPosition>k__BackingField: {x: 4, y: 20, z: -12.6}

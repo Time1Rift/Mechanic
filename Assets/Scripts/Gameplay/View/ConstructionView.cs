@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
-using System.Drawing;
 
 public class ConstructionView
 {
@@ -14,6 +13,7 @@ public class ConstructionView
     private float _moveDuration;
     private Vector3 _sesignReviewPosition;
     private Vector3 _curentPosition;
+    private float _durationRotate;
 
     public ConstructionView(Transform preview, TextMeshProUGUI text, ConstructionViewInfo _constructionViewInfo)
     {
@@ -22,6 +22,7 @@ public class ConstructionView
         _durationMover = _constructionViewInfo.DurationMover;
         _positionIndentation = _constructionViewInfo.PositionIndentation;
         _moveDuration = _constructionViewInfo.MoveDuration;
+        _durationRotate = _constructionViewInfo.DurationRotate;
         _sesignReviewPosition = _constructionViewInfo.SesignReviewPosition;
         _transformCamera = Camera.main.transform;
     }
@@ -51,6 +52,7 @@ public class ConstructionView
 
     public void DrawBolt(Transform bolt, Transform point)
     {
+        bolt.DOLocalRotate(Vector3.zero, _durationRotate);
         bolt.DOPath(new Vector3[] { point.position }, _durationMover, PathType.CatmullRom);
     }
 }

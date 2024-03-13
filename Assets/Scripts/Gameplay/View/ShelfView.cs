@@ -3,12 +3,12 @@ using UnityEngine;
 using DG.Tweening;
 using System.Linq;
 using System;
-using UnityEngine.UIElements;
 
 public class ShelfView
 {
     private float _durationMover;
     private float _durationConnected;
+    private float _durationRotate;
     private float _durationScale;
     private float _maxScale;
     private float _minScale;
@@ -26,13 +26,14 @@ public class ShelfView
     {
         _durationMover = shelfViewInfo.DurationMover;
         _durationConnected = shelfViewInfo.DurationConnected;
+        _durationRotate = shelfViewInfo.DurationRotate;
         _durationScale = shelfViewInfo.DurationScale;
         _maxScale = shelfViewInfo.MaxScale;
         _minScale = shelfViewInfo.MinScale;
         _shelf = shelf;
 
-        SpawnPoints spawnPoints = new SpawnPoints(transformShelf, shelfViewInfo.Offset);
-        Transform[] points = spawnPoints.GetPoints();
+        SpawnPoints spawnPoints = new SpawnPoints();
+        Transform[] points = spawnPoints.GetPoints(transformShelf, shelfViewInfo.Offset);
 
         foreach (Transform item in points)
             _shelfCells.Add(new ShelfCell(item, null));
@@ -99,6 +100,7 @@ public class ShelfView
             if (item.IsCellEmpty)
             {
                 item.SetBolt(bolt);
+                bolt.Transform.DOLocalRotate(Vector3.zero, _durationRotate);
                 return;
             }
         }

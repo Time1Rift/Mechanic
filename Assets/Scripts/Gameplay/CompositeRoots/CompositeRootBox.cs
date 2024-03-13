@@ -7,16 +7,15 @@ public class CompositeRootBox : MonoBehaviour
 
     private BoxView _boxView;
     private Box _box;
-    private SpawnPoints _spawnPoints;
 
     private void Start()
     {
-        _box.Initialize(_spawnPoints);
+        SpawnPoints spawnPoints = new SpawnPoints();
+        _box.Initialize(spawnPoints, _boltSpawner.transform);
     }
 
     public void Initialize()
     {
-        _spawnPoints = new SpawnPoints(_boltSpawner.transform, _boxInfo.OffsetColumns);
         _box = new Box(_boltSpawner, _boxInfo.CountLines);
         _boxView = new BoxView(_boxInfo.OffsetLines);
     }

@@ -2,38 +2,39 @@ using UnityEngine;
 
 public class SpawnPoints
 {
-    private Transform _transform;
-    private Transform[] _points;
-    private float _offset;
-
-    public SpawnPoints(Transform transform, float offset)
+    public Transform[] GetPoints(Transform transform, float offsetX)
     {
-        _offset = offset;
-        _transform = transform;
-        
-        ArrangePoints();
-    }
+        Transform[] points = new Transform[transform.childCount];
 
-    public Transform[] GetPoints()
-    {
-        Transform[] result = new Transform[_points.Length];
+        Vector3 offset = new Vector3(offsetX, 0, 0);
+
+        for (int i = 0; i < points.Length; i++)
+        {
+            points[i] = transform.GetChild(i);
+            points[i].position += offset;
+            offset.x += offsetX;
+        }
+
+        Transform[] result = new Transform[points.Length];
 
         for (int i = 0; i < result.Length; i++)
-            result[i] = _points[i];
+            result[i] = points[i];
 
         return result;
     }
 
-    private void ArrangePoints()
+    public Transform[] GetPoints(Transform transform)
     {
-        _points = new Transform[_transform.childCount];
-        Vector3 offset = new Vector3(_offset, 0, 0);
+        Transform[] points = new Transform[transform.childCount];
 
-        for (int i = 0; i < _points.Length; i++)
-        {
-            _points[i] = _transform.GetChild(i);
-            _points[i].position += offset;
-            offset.x += _offset;
-        }
+        for (int i = 0; i < points.Length; i++)
+            points[i] = transform.GetChild(i);
+
+        Transform[] result = new Transform[points.Length];
+
+        for (int i = 0; i < result.Length; i++)
+            result[i] = points[i];
+
+        return result;
     }
 }

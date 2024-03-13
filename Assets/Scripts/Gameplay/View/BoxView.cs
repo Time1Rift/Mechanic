@@ -21,6 +21,7 @@ public class BoxView
 
         for (int i = transforms.Count - 1; i >= 0; i--)
         {
+            transforms[i].localRotation = Quaternion.Euler(0, 0, 0);
             transforms[i].position = boltColumn.Position + _boltOffset;
             _boltOffset.z -= _offset;
         }
