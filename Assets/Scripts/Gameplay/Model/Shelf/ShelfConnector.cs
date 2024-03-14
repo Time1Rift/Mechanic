@@ -34,34 +34,34 @@ public class ShelfConnector : ILosed
         _shelfView.Pulsated -= OnPulsated;
     }
 
-    public void Subscribe(Bolt bolt) => bolt.Pressed += OnPressed;
+    public void SubscribeBoli(Bolt bolt) => bolt.Pressed += OnPressed;
 
-    public void Unsubscribe(Bolt bolt) => bolt.Pressed -= OnPressed;
+    public void UnsubscribeBolt(Bolt bolt) => bolt.Pressed -= OnPressed;
+
+    public void TryRemove()
+    {
+        if (_shelfInspector.TryRemove(_shelf.Bolts, out Bolt bolt))
+        {
+            _shelf.Remove(bolt);
+            _shelfView.RemoveBolt(bolt);
+        }
+    }
 
     private void OnPressed(Bolt bolt)
     {
         if (_shelf.IsShelfFull)
             return;
 
-        Unsubscribe(bolt);
+        UnsubscribeBolt(bolt);
         _shelf.AddBolt(bolt);
         _shelfView.MoverBolt(bolt);
     }
 
-    private void OnMoved(Bolt bolt)
+    private void OnMoved()
     {
-        TryRemove(bolt);
+        TryRemove();
         FoldBolts();
         TryLosed();
-    }
-
-    private void TryRemove(Bolt bolt)
-    {
-        if (_shelfInspector.TryRemove(bolt))
-        {
-            _shelf.Remove(bolt);
-            _shelfView.RemoveBolt(bolt);
-        }
     }
 
     private void FoldBolts()
@@ -79,14 +79,18 @@ public class ShelfConnector : ILosed
     private void ConnectBolts()
     {
         _newBolt = _shelf.GetBolt(_followingNumber);
-        Unsubscribe(_newBolt);
-        _shelf.AddBolt(_newBolt);
-        _shelfView.Pulsate(_newBolt);        
+
+        if(_newBolt != null)
+        {
+            UnsubscribeBolt(_newBolt);
+            _shelf.AddBolt(_newBolt);
+            _shelfView.Pulsate(_newBolt);
+        }                
     }
 
-    private void OnPulsated(Bolt bolt)
+    private void OnPulsated()
     {
-        TryRemove(bolt);
+        TryRemove();
         FoldBolts();
     }
 

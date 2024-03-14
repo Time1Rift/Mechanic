@@ -9,6 +9,8 @@ public class BoltSpawner : ObjectPool<Bolt>, IBoltCreated
 
     private Bolt _newBolt;
 
+    public int CountVarietyBolt => _varietyBolts.Count;
+
     public event System.Action<Bolt> BoltCreated;
 
     private void OnValidate()
@@ -22,6 +24,7 @@ public class BoltSpawner : ObjectPool<Bolt>, IBoltCreated
 
     public Bolt GetBolt(int number)
     {
+        Mathf.Clamp(number, 0, _varietyBolts.Count);
         _newBolt = GetObject(_boltPrebab);
         _newBolt.Initialize(_varietyBolts[number].Number, _varietyBolts[number].Mesh);
         _newBolt.gameObject.SetActive(true);

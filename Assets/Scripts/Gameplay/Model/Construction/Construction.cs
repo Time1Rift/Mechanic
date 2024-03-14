@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Construction : IWin
+public class Construction : IWin, IFigured
 {
     private Queue<Detail> _details = new();
     private ConstructionView _view;
     private Detail _detail;
     private Transform _point;
     private int _number;
+    private PartDetail _partDetail;
 
     public Construction(Transform model, ConstructionView view)
     {
@@ -19,6 +20,7 @@ public class Construction : IWin
     }
 
     public event Action Win;
+    public event Action ItemReceived;
 
     public void SetDetail()
     {
@@ -33,11 +35,10 @@ public class Construction : IWin
 
     private void OnPostponed(Bolt bolt)
     {
-        bolt.Postponed -= OnPostponed;
-
         if (bolt.Number != _number)
             return;
-        
+                
+        bolt.Postponed -= OnPostponed;
         bolt.Transform.SetParent(_point);
         bolt.DisableText();
         _view.DrawBolt(bolt.Transform, _point);
@@ -66,10 +67,13 @@ public class Construction : IWin
 
     private void SetPoint()
     {
-        _point = _detail.GetPoint();
-        _number = _detail.Number;
-
+        _partDetail = _detail.GetPartDetail();
+        _point = _partDetail.Transform;
+        _number = _partDetail.Number;
+        
         _view.MoveCamera(_point.position);
         _view.DrawPreview(_point.position, _number);
+
+        ItemReceived?.Invoke();
     }
 }

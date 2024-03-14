@@ -7,6 +7,7 @@ public class CompositeRootShelf : MonoBehaviour
     [SerializeField] private BoltSpawner _spawner;
     [SerializeField] private Transform _shelTransform;
     [SerializeField] private CompositeRootGameplayUI _buttonReboot;
+    [SerializeField] private CompositeRootConstruction _figured;
 
     private ShelfView _shelfView;
     private ShelfConnector _shelfConnector;
@@ -17,7 +18,7 @@ public class CompositeRootShelf : MonoBehaviour
     {
         _shelf = new Shelf(_spawner, _shelfInfo.MaxBolts);
         _shelfView = new ShelfView(_shelfViewInfo, _shelTransform, _shelf);
-        _shelfInspector = new ShelfInspector(_shelfInfo.CountBoltsAddition, _shelfInfo.MaxBolts);
+        _shelfInspector = new ShelfInspector(_shelfInfo.CountBoltsAddition, _shelfInfo.MaxBolts, _spawner.CountVarietyBolt);
         _shelfConnector = new ShelfConnector(_shelfInspector, _shelf, _shelfView);
     }
 
@@ -25,6 +26,7 @@ public class CompositeRootShelf : MonoBehaviour
     {
         _spawner.BoltCreated += OnBoltCreated;
         _spawner.Unsubscribed += OnUnsubscribe;
+        _figured.SubscribeFigured().ItemReceived += OnItemReceived;
         _shelfConnector.Enable();
 
         foreach (var reboot in _buttonReboot.GetButtonReboots())
@@ -35,6 +37,7 @@ public class CompositeRootShelf : MonoBehaviour
     {
         _spawner.BoltCreated -= OnBoltCreated;
         _spawner.Unsubscribed -= OnUnsubscribe;
+        _figured.SubscribeFigured().ItemReceived -= OnItemReceived;
         _shelfConnector.Disable();
 
         foreach (var reboot in _buttonReboot.GetButtonReboots())
@@ -49,7 +52,9 @@ public class CompositeRootShelf : MonoBehaviour
         _shelfView.ClearShelf();
     }
 
-    private void OnBoltCreated(Bolt bolt) => _shelfConnector.Subscribe(bolt);   
+    private void OnBoltCreated(Bolt bolt) => _shelfConnector.SubscribeBoli(bolt);   
     
-    private void OnUnsubscribe(Bolt bolt) => _shelfConnector.Unsubscribe(bolt);    
+    private void OnUnsubscribe(Bolt bolt) => _shelfConnector.UnsubscribeBolt(bolt);
+
+    private void OnItemReceived() => _shelfConnector.TryRemove();
 }

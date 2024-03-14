@@ -19,7 +19,6 @@ public class ShelfView
     private Queue<Bolt> _boltsMover = new();
     private Queue<Bolt> _boltsConnected = new();
     private int _countduplicates;
-    private Bolt _boltPulsate;
 
 
     public ShelfView(ShelfViewInfo shelfViewInfo, Transform transformShelf, Shelf shelf)
@@ -39,9 +38,9 @@ public class ShelfView
             _shelfCells.Add(new ShelfCell(item, null));
     }
 
-    public event Action<Bolt> Moved;
+    public event Action Moved;
     public event Action Connected;
-    public event Action<Bolt> Pulsated;
+    public event Action Pulsated;
 
     public void MoverBolt(Bolt bolt)
     {
@@ -67,11 +66,10 @@ public class ShelfView
     {
         int modifier = 2;
 
-        _boltPulsate = bolt;
-        AddBolt(_boltPulsate);
-        _boltPulsate.Transform.localPosition = Vector3.zero;
-        _boltPulsate.Transform.DOScale(_maxScale, _durationScale).SetEase(Ease.Linear).SetLoops(modifier, LoopType.Yoyo);
-        _boltPulsate.Transform.DOScale(_minScale, _durationScale).SetEase(Ease.Linear).SetLoops(modifier, LoopType.Yoyo).SetDelay(modifier * _durationScale)
+        AddBolt(bolt);
+        bolt.Transform.localPosition = Vector3.zero;
+        bolt.Transform.DOScale(_maxScale, _durationScale).SetEase(Ease.Linear).SetLoops(modifier, LoopType.Yoyo);
+        bolt.Transform.DOScale(_minScale, _durationScale).SetEase(Ease.Linear).SetLoops(modifier, LoopType.Yoyo).SetDelay(modifier * _durationScale)
             .OnComplete(SendEventPulsated);
     }
 
@@ -115,7 +113,7 @@ public class ShelfView
             Connected?.Invoke();
     }
 
-    private void SendEventMoved() => Moved?.Invoke(_boltsMover.Dequeue());
+    private void SendEventMoved() => Moved?.Invoke();
 
-    private void SendEventPulsated() => Pulsated?.Invoke(_boltPulsate);
+    private void SendEventPulsated() => Pulsated?.Invoke();
 }
