@@ -1,23 +1,12 @@
-using System;
-using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ButtonReboot : ButtonAbstract, IPressed
+public class ButtonReboot : ButtonAbstract
 {
-    private GameObject _screen;
-
-    public ButtonReboot(Button button, GameObject screen) : base(button) 
-    {
-        _screen = screen;
-    }
-
-    public event Action ShelfCleared;
-    public event Action<bool> Pressed;
+    public ButtonReboot(Button button) : base(button) { }
 
     protected override void OnButtonClick()
     {
-        ShelfCleared?.Invoke();
-        _screen.SetActive(false);
-        Pressed?.Invoke(true);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

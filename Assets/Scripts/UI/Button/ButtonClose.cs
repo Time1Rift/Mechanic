@@ -4,18 +4,18 @@ using UnityEngine.UI;
 
 public class ButtonClose : ButtonAbstract, IPressed
 {
-    private GameObject _windowSettings;
+    private GameObject _window;
 
-    public ButtonClose(Button button, GameObject windowSettings) : base(button)
+    public ButtonClose(Button button, GameObject window) : base(button)
     {
-        _windowSettings = windowSettings;
+        _window = window;
     }
 
     public event Action<bool> Pressed;
 
     protected override void OnButtonClick()
     {
-        _windowSettings.SetActive(false);
+        _window.SetActive(false);
         Pressed?.Invoke(true);
     }
 }

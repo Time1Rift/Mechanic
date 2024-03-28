@@ -6,8 +6,8 @@ public class CompositeRootShelf : MonoBehaviour
     [SerializeField] private ShelfViewInfo _shelfViewInfo;
     [SerializeField] private BoltSpawner _spawner;
     [SerializeField] private Transform _shelTransform;
-    [SerializeField] private CompositeRootGameplayUI _buttonReboot;
-    [SerializeField] private CompositeRootConstruction _figured;
+    [SerializeField] private CompositeRootConstruction _construction;
+    [SerializeField] private CompositeRootGameplayUI _buttonCleaningShelf;
 
     private ShelfView _shelfView;
     private ShelfConnector _shelfConnector;
@@ -26,27 +26,23 @@ public class CompositeRootShelf : MonoBehaviour
     {
         _spawner.BoltCreated += OnBoltCreated;
         _spawner.Unsubscribed += OnUnsubscribe;
-        _figured.SubscribeFigured().ItemReceived += OnItemReceived;
+        _construction.SubscribeFigured().ItemReceived += OnItemReceived;
         _shelfConnector.Enable();
-
-        foreach (var reboot in _buttonReboot.GetButtonReboots())
-            reboot.ShelfCleared += ClearShelf;
+        _buttonCleaningShelf.ClearShelf().ShelfCleared += OnClearShelf;
     }    
 
     public void Disable()
     {
         _spawner.BoltCreated -= OnBoltCreated;
         _spawner.Unsubscribed -= OnUnsubscribe;
-        _figured.SubscribeFigured().ItemReceived -= OnItemReceived;
+        _construction.SubscribeFigured().ItemReceived -= OnItemReceived;
         _shelfConnector.Disable();
-
-        foreach (var reboot in _buttonReboot.GetButtonReboots())
-            reboot.ShelfCleared += ClearShelf;
+        _buttonCleaningShelf.ClearShelf().ShelfCleared -= OnClearShelf;
     }
 
     public ILosed GetILosed() => _shelfConnector;
 
-    private void ClearShelf()
+    private void OnClearShelf()
     {
         _shelf.ClearShelf();
         _shelfView.ClearShelf();

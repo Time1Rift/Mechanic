@@ -3,9 +3,9 @@ using UnityEngine;
 public class CompositeRootConstruction : MonoBehaviour
 {
     [SerializeField] private ConstructionViewInfo _constructionViewInfo;
-    [SerializeField] private Constructions _prefabs;
+    [SerializeField] private ListLevels _listLevels;
     [SerializeField] private BoltSpawner _boltSpawner;
-    [SerializeField] private Transform _Construction;
+    [SerializeField] private Transform _positionConstruction;
 
     private ConstructionView _view;
     private Construction _construction;
@@ -46,9 +46,15 @@ public class CompositeRootConstruction : MonoBehaviour
 
     private ConstructionPrefab GetPrefab()
     {
-        if (PlayerPrefs.HasKey("CountConstructions") == false)
-            PlayerPrefs.SetInt("CountConstructions", _prefabs.Count);
+        PlayerDataSelectedLevel Levels = new PlayerDataSelectedLevel();
+        int level = Levels.Level;
 
-        return Instantiate(_prefabs.CountConstruction[Random.Range(0, PlayerPrefs.GetInt("CountConstructions"))], _Construction);
+        if(level > _listLevels.CountLevels)
+        {
+            Levels.ResetLevel();
+            level = Levels.Level;
+        }
+
+        return Instantiate(_listLevels.GetConstruction(level), _positionConstruction);
     }
 }

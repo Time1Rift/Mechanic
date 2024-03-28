@@ -5,7 +5,7 @@ public class ButtonExit : ButtonAbstract
 {
     private int _indexScene;
 
-    public ButtonExit(Button button, int indexScene = 0) : base(button) 
+    public ButtonExit(UnityEngine.UI.Button button, int indexScene = 0) : base(button) 
     {
         _indexScene = indexScene;
     }

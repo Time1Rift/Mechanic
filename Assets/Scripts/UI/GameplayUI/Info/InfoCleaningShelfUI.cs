@@ -1,0 +1,14 @@
+using System;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+[Serializable]
+public struct InfoCleaningShelfUI
+{
+    [field: SerializeField] public GameObject CleaningShelfScreen { get; private set; }
+    [field: SerializeField] public Button ButtonCleaningShelf { get; private set; }
+    [field: SerializeField] public Button ButtonClose { get; private set; }
+    [field: SerializeField] public Button ButtonCoins { get; private set; }
+    [field: SerializeField] public Button ButtonAdvertisement { get; private set; }
+}

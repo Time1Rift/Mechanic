@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bcdf7d579718ec4ebe8e8f9fe938e25, type: 3}
+  m_Name: ListVarietyBolts
+  m_EditorClassIdentifier: 
+  <VarietyBolts>k__BackingField:
+  - {fileID: 11400000, guid: 8b8268cba06664645b097e32fbbda03e, type: 2}
+  - {fileID: 11400000, guid: 9266205d5833a3542afcd2c216a3ba45, type: 2}
+  - {fileID: 11400000, guid: 4def41c78090ad947ba536d9315e75e4, type: 2}
+  - {fileID: 11400000, guid: ead27c9bf939673419d186616327f305, type: 2}
+  - {fileID: 11400000, guid: 2a5afa7c1d83fd745ad1667ddd9703d5, type: 2}
+  - {fileID: 11400000, guid: af8fa4e6cc6ac0c48beb0e7eda145285, type: 2}
+  - {fileID: 11400000, guid: 5c1968c8c50fbae4bb8f74b61bda727b, type: 2}
+  - {fileID: 11400000, guid: 841967032517e0e45897d100d29976de, type: 2}
+  - {fileID: 11400000, guid: ac7cd689d5a11d94e94dcbdecebebb8e, type: 2}
+  - {fileID: 11400000, guid: f545fb3201b9d4f4c90195000c90e460, type: 2}
+  - {fileID: 11400000, guid: e0d7da882b9344748b9d5d63b68c0a8f, type: 2}
+  - {fileID: 11400000, guid: 9d95dc6661d7be4498738d84401a1aa6, type: 2}
