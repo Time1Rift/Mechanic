@@ -47,12 +47,12 @@ public class CompositeRootConstruction : MonoBehaviour
     private ConstructionPrefab GetPrefab()
     {
         PlayerDataSelectedLevel Levels = new PlayerDataSelectedLevel();
-        int level = Levels.Level;
+        int level = Levels.GetValue();
 
         if(level > _listLevels.CountLevels)
         {
             Levels.ResetLevel();
-            level = Levels.Level;
+            level = Levels.GetValue();
         }
 
         return Instantiate(_listLevels.GetConstruction(level), _positionConstruction);

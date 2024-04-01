@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CompositionOrder : MonoBehaviour
+public class CompositionOrderGameplay : MonoBehaviour
 {
     [SerializeField] private BoltSpawner _boltSpawner;
     [SerializeField] private CompositeRootGameplayUI _gameplayUI;

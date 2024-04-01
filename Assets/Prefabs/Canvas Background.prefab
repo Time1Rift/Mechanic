@@ -87,6 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0.03
+  _width: 0.2
 --- !u!1 &8524699423816533626
 GameObject:
   m_ObjectHideFlags: 0

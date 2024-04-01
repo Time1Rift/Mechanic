@@ -9,7 +9,7 @@ public class ListLevelsUI
 
     public ListLevelsUI(ListLevels listLevels, LevelUISpawner spawner)
     {
-        _maxAvailableLevel = new PlayerDataMaxAvailableLevel().Level;
+        _maxAvailableLevel = new PlayerDataMaxAvailableLevel().GetValue();
         _levels = listLevels.Levels;
         _spawner = spawner;
     }

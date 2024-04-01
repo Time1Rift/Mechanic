@@ -54,7 +54,7 @@ public class CompositeRootGame : MonoBehaviour
         PlayerDataMaxAvailableLevel maxAvailableLevel = new PlayerDataMaxAvailableLevel();
         PlayerDataSelectedLevel selectedLevel = new PlayerDataSelectedLevel();
 
-        if (selectedLevel.Level == maxAvailableLevel.Level)
-            maxAvailableLevel.Level++;
+        if (selectedLevel.GetValue() == maxAvailableLevel.GetValue())
+            maxAvailableLevel.NextValue();
     }
 }

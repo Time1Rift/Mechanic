@@ -4,9 +4,13 @@ public class PlayerDataMaxAvailableLevel
 {
     private const string MaxAvailableLevel = "MaxAvailableLevel";
 
-    public int Level
+    public PlayerDataMaxAvailableLevel()
     {
-        get => PlayerPrefs.HasKey(MaxAvailableLevel) ? PlayerPrefs.GetInt(MaxAvailableLevel) : 1;
-        set => PlayerPrefs.SetInt(MaxAvailableLevel, value);
+        if (PlayerPrefs.HasKey(MaxAvailableLevel) == false)
+            PlayerPrefs.SetInt(MaxAvailableLevel, 1);
     }
+
+    public int GetValue() => PlayerPrefs.GetInt(MaxAvailableLevel);
+
+    public void NextValue() => PlayerPrefs.SetInt(MaxAvailableLevel, (GetValue() + 1));
 }

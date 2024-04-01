@@ -32,6 +32,9 @@ public class ShelfActiveCubes
     {
         _purchasedCellShops.CellShopAdded -= OnCellShopAdded;
 
+        foreach (var item in _purchasedCellShops.CellShop)
+            item.SelectionButtonClick -= OnSelectionButtonClick;
+
         for (int i = 0; i < _activeCubes.Count; i++)
             _activeCubes[i].Presed -= OnPresed;
     }

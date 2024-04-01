@@ -6,7 +6,7 @@ public class ButtonNextLevel : ButtonAbstract
     private int _indexScene;
     private PlayerDataSelectedLevel _playerData;
 
-    public ButtonNextLevel(Button button, int indexScene = 1) : base(button) 
+    public ButtonNextLevel(Button button, int indexScene = 2) : base(button) 
     {
         _indexScene = indexScene;
         _playerData = new PlayerDataSelectedLevel();
@@ -14,7 +14,7 @@ public class ButtonNextLevel : ButtonAbstract
 
     protected override void OnButtonClick()
     {
-        _playerData.Level++;
+        _playerData.NextValue();
         SceneManager.LoadScene(_indexScene);
     }
 }

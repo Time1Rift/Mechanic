@@ -4,9 +4,13 @@ public class PlayerDateWallet
 {
     private const string CountCoins = "CountCoins";
 
-    public int Wallet
+    public PlayerDateWallet()
     {
-        get => PlayerPrefs.HasKey(CountCoins) ? PlayerPrefs.GetInt(CountCoins) : 0;
-        set => PlayerPrefs.SetInt(CountCoins, value);
+        if (PlayerPrefs.HasKey(CountCoins) == false)
+            PlayerPrefs.SetInt(CountCoins, 0);
     }
+
+    public int GetValue() => PlayerPrefs.GetInt(CountCoins);
+
+    public void SetValue(int value) => PlayerPrefs.SetInt(CountCoins, value);
 }

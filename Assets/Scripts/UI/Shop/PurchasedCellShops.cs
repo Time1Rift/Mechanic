@@ -9,6 +9,8 @@ public class PurchasedCellShops
 
     public event Action<CellShop> CellShopAdded;
 
+    public IReadOnlyList<CellShop> CellShop => _cellShop;
+
     public void AddCellShop(CellShop cellShop)
     {
         _cellShop.Add(cellShop);

@@ -18,7 +18,7 @@ public class ButtonMusic : ButtonAbstract
         _icon = icon;
 
         _playerData = new PlayerDataMusic();
-        _isEnabled = _playerData.IsEnabledMusic;
+        _isEnabled = _playerData.GetValue();
 
         ChangeAudio();
     }
@@ -27,7 +27,7 @@ public class ButtonMusic : ButtonAbstract
     {
         _isEnabled = !_isEnabled;
         ChangeAudio();
-        _playerData.IsEnabledMusic = _isEnabled;
+        _playerData.SetValue(_isEnabled);
     }
 
     private void ChangeAudio()

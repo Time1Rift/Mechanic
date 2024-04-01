@@ -10,7 +10,7 @@ public class Wallet
         _countCoinsText = countCoinsText;
         _playerData = new PlayerDateWallet();
 
-        CountCoins = _playerData.Wallet;
+        CountCoins = _playerData.GetValue();
         _countCoinsText.text = CountCoins.ToString();
     }
 
@@ -31,6 +31,6 @@ public class Wallet
     private void UpdateCoinsText()
     {
         _countCoinsText.text = CountCoins.ToString();
-        _playerData.Wallet = CountCoins;
+        _playerData.SetValue(CountCoins);
     }
 }
