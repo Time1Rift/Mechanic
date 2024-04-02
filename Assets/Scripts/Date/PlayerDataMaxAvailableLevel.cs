@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class PlayerDataMaxAvailableLevel
 {
-    private const string MaxAvailableLevel = "MaxAvailableLevel";
+    private const string NameFile = "MaxAvailableLevel";
 
     public PlayerDataMaxAvailableLevel()
     {
-        if (PlayerPrefs.HasKey(MaxAvailableLevel) == false)
-            PlayerPrefs.SetInt(MaxAvailableLevel, 1);
+        if (PlayerPrefs.HasKey(NameFile) == false)
+            PlayerPrefs.SetInt(NameFile, 1);
     }
 
-    public int GetValue() => PlayerPrefs.GetInt(MaxAvailableLevel);
+    public int GetValue() => PlayerPrefs.GetInt(NameFile);
 
-    public void NextValue() => PlayerPrefs.SetInt(MaxAvailableLevel, (GetValue() + 1));
+    public void NextValue() => PlayerPrefs.SetInt(NameFile, (GetValue() + 1));
 }

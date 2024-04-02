@@ -19,7 +19,7 @@ public class Localization : MonoBehaviour
     private void Awake()
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
-    ChangeLanguage();
+        ChangeLanguage();
 #endif
     }
 
@@ -44,7 +44,7 @@ public class Localization : MonoBehaviour
     }
 
     public void ChangeLanguage(int value)
-    {        
+    {
         switch (value)
         {
             case RussianInt:

@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class PlayerDataMusic
 {
-    private const string IsBoolAudio = "isBoolAudio";
+    private const string NameFile = "isBoolAudio";
 
     public PlayerDataMusic()
     {
-        if (PlayerPrefs.HasKey(IsBoolAudio) == false)
-            PlayerPrefs.SetInt(IsBoolAudio, 1);
+        if (PlayerPrefs.HasKey(NameFile) == false)
+            PlayerPrefs.SetInt(NameFile, 1);
     }
 
-    public bool GetValue() => PlayerPrefs.GetInt(IsBoolAudio) == 1 ? true : false;
+    public bool GetValue() => PlayerPrefs.GetInt(NameFile) == 1 ? true : false;
 
-    public void SetValue(bool value) => PlayerPrefs.SetInt(IsBoolAudio, (value == true ? 1 : 0));
+    public void SetValue(bool value) => PlayerPrefs.SetInt(NameFile, (value == true ? 1 : 0));
 }

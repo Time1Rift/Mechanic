@@ -4,14 +4,14 @@ using UnityEngine.SceneManagement;
 
 public class PlayerDataScene : MonoBehaviour
 {
-    private const string DataScene = "DataScene";
+    private const string NameFile = "DataScene";
 
     public event Action SceneLoaded;
 
     private void Awake()
     {
-        if (PlayerPrefs.HasKey(DataScene) == false)
-            PlayerPrefs.SetInt(DataScene, SceneManager.GetActiveScene().buildIndex);
+        if (PlayerPrefs.HasKey(NameFile) == false)
+            PlayerPrefs.SetInt(NameFile, SceneManager.GetActiveScene().buildIndex);
     }
 
     private void Start()
@@ -22,7 +22,7 @@ public class PlayerDataScene : MonoBehaviour
         SetValue();
     }
 
-    private int GetValue() => PlayerPrefs.GetInt(DataScene);
+    private int GetValue() => PlayerPrefs.GetInt(NameFile);
 
-    private void SetValue() => PlayerPrefs.SetInt(DataScene, SceneManager.GetActiveScene().buildIndex);
+    private void SetValue() => PlayerPrefs.SetInt(NameFile, SceneManager.GetActiveScene().buildIndex);
 }

@@ -51,10 +51,10 @@ public class CompositeRootGame : MonoBehaviour
     private void UpdateData()
     {
         _coins.AddCoins();
+        new PlayerDateCompletedLevels().AddValue();
         PlayerDataMaxAvailableLevel maxAvailableLevel = new PlayerDataMaxAvailableLevel();
-        PlayerDataSelectedLevel selectedLevel = new PlayerDataSelectedLevel();
 
-        if (selectedLevel.GetValue() == maxAvailableLevel.GetValue())
+        if (new PlayerDataSelectedLevel().GetValue() == maxAvailableLevel.GetValue())
             maxAvailableLevel.NextValue();
     }
 }

@@ -15,5 +15,10 @@ public class SDKGameReady : MonoBehaviour
         _playerData.SceneLoaded -= OnSceneLoaded;
     }
 
-    private void OnSceneLoaded() => YandexGamesSdk.GameReady();
+    private void OnSceneLoaded()
+    {
+#if !UNITY_EDITOR
+        YandexGamesSdk.GameReady();
+#endif
+    }
 }
