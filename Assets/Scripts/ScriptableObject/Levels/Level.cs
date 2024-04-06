@@ -4,5 +4,5 @@ using UnityEngine;
 public class Level : ScriptableObject
 {
     [field: SerializeField, Min(1)] public int Number { get; private set; }
-    [field: SerializeField] public ConstructionPrefab Construction { get; private set; }
+    [field: SerializeField] public Figure Construction { get; private set; }
 }

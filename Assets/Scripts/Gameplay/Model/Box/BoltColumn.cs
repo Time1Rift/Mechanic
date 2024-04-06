@@ -12,7 +12,7 @@ public class BoltColumn
     }
 
     public int Count => _bolts.Count;
-    public Vector3 Position => _transform.position;
+    public Vector3 Position => _transform.localPosition;
 
     public void AddBolt(Bolt bolt) => _bolts.Enqueue(bolt);
 

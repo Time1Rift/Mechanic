@@ -3,20 +3,11 @@ using UnityEngine;
 
 public class Detail
 {
-    private Queue<PartDetail> _points = new();
-    private Transform _transformModel;
+    private Queue<PartDetail> _partDetails = new();
 
-    public Detail(Transform transform)
-    {
-        _transformModel = transform.GetChild(0);
+    public int Count => _partDetails.Count;
 
-        for (int i = 1; i < transform.childCount; i++)
-            _points.Enqueue(transform.GetChild(i).GetComponent<PartDetail>());
-    }
+    public void AddPartDetail(int number, Vector3 position) => _partDetails.Enqueue(new PartDetail(number, position));
 
-    public bool TryCount => _points.Count > 0;
-
-    public void Draw() => _transformModel.gameObject.SetActive(true);
-
-    public PartDetail GetPartDetail() => _points.Dequeue();
+    public PartDetail GetPartDetail() => _partDetails.Dequeue();
 }

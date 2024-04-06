@@ -1,21 +1,19 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Construction : IWin, IFigured
 {
-    private Queue<Detail> _details = new();
     private ConstructionView _view;
     private Detail _detail;
-    private Transform _point;
+    private Vector3 _point;
     private int _number;
     private PartDetail _partDetail;
+    private Figure _figure;
 
-    public Construction(Transform model, ConstructionView view)
+    public Construction(Figure figure, ConstructionView view)
     {
-        for (int i = 0; i < model.childCount; i++)
-            _details.Enqueue(new Detail(model.GetChild(i)));
-
+        _figure = figure;
+        _figure.Initialized();
         _view = view;
     }
 
@@ -24,8 +22,7 @@ public class Construction : IWin, IFigured
 
     public void SetDetail()
     {
-        _detail = _details.Dequeue();
-        _detail.Draw();
+        _detail = _figure.GetDetail();
         SetPoint();
     }
 
@@ -39,7 +36,7 @@ public class Construction : IWin, IFigured
             return;
                 
         bolt.Postponed -= OnPostponed;
-        bolt.Transform.SetParent(_point);
+        bolt.Transform.SetParent(_figure.transform);
         bolt.DisableText();
         _view.DrawBolt(bolt.Transform, _point);
 
@@ -48,13 +45,13 @@ public class Construction : IWin, IFigured
 
     private void TryGetPoint()
     {
-        if (_detail.TryCount)
+        if (_detail.Count != 0)
         {
             SetPoint();
             return;
         }
 
-        if (_details.Count == 0)
+        if (_figure.Count == 0)
         {
             _view.RemovePreview();
             Win?.Invoke();
@@ -68,11 +65,11 @@ public class Construction : IWin, IFigured
     private void SetPoint()
     {
         _partDetail = _detail.GetPartDetail();
-        _point = _partDetail.Transform;
+        _point = _partDetail.Position;
         _number = _partDetail.Number;
         
-        _view.MoveCamera(_point.position);
-        _view.DrawPreview(_point.position, _number);
+        _view.DrawPreview(_point, _number);
+        _view.MoveCamera(_point);
 
         ItemReceived?.Invoke();
     }

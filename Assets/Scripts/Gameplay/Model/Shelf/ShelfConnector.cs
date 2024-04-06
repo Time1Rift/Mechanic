@@ -40,7 +40,7 @@ public class ShelfConnector : ILosed
 
     public void TryRemove()
     {
-        if (_shelfInspector.TryRemove(_shelf.Bolts, out Bolt bolt))
+        while (_shelfInspector.TryRemove(_shelf.Bolts, out Bolt bolt))
         {
             _shelf.Remove(bolt);
             _shelfView.RemoveBolt(bolt);

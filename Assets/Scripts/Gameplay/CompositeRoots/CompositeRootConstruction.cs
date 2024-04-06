@@ -17,9 +17,9 @@ public class CompositeRootConstruction : MonoBehaviour
 
     public void Initialize()
     {
-        ConstructionPrefab prefab = GetPrefab();
+        Figure prefab = GetPrefab();
         _view = new ConstructionView(prefab.Preview, prefab.NumberText, _constructionViewInfo);
-        _construction = new Construction(prefab.Model, _view);
+        _construction = new Construction(prefab, _view);
     }
 
     public void Enable()
@@ -44,7 +44,7 @@ public class CompositeRootConstruction : MonoBehaviour
 
     private void OnUnsubscribe(Bolt bolt) => _construction.Unsubscribe(bolt);
 
-    private ConstructionPrefab GetPrefab()
+    private Figure GetPrefab()
     {
         PlayerDataSelectedLevel Levels = new PlayerDataSelectedLevel();
         int level = Levels.GetValue();

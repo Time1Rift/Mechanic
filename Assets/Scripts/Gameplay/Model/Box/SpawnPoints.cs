@@ -5,7 +5,6 @@ public class SpawnPoints
     public Transform[] GetPoints(Transform transform, float offsetX)
     {
         Transform[] points = new Transform[transform.childCount];
-
         Vector3 offset = new Vector3(offsetX, 0, 0);
 
         for (int i = 0; i < points.Length; i++)

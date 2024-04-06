@@ -9,7 +9,7 @@ public class ConstructionView
     private float _durationMover;
 
     private Transform _transformCamera;
-    private Vector3 _positionIndentation;
+    private Vector3 _cameraIndentation;
     private float _moveDuration;
     private Vector3 _sesignReviewPosition;
     private Vector3 _curentPosition;
@@ -20,7 +20,7 @@ public class ConstructionView
         _preview = preview;
         _numberText = text;
         _durationMover = _constructionViewInfo.DurationMover;
-        _positionIndentation = _constructionViewInfo.PositionIndentation;
+        _cameraIndentation = _constructionViewInfo.CameraIndentation;
         _moveDuration = _constructionViewInfo.MoveDuration;
         _durationRotate = _constructionViewInfo.DurationRotate;
         _sesignReviewPosition = _constructionViewInfo.SesignReviewPosition;
@@ -39,20 +39,20 @@ public class ConstructionView
 
     public void MoveCamera(Vector3 point)
     {
-        point += _positionIndentation;
+        point += _cameraIndentation;
         _transformCamera.DOMove(point, _moveDuration).SetDelay(_moveDuration);
         _curentPosition = point;
     }
 
     public void DrawPreview(Vector3 point, int number)
     {
-        _preview.position = point;
+        _preview.localPosition = point;
         _numberText.text = number.ToString();
     }
 
-    public void DrawBolt(Transform bolt, Transform point)
+    public void DrawBolt(Transform bolt, Vector3 point)
     {
         bolt.DOLocalRotate(Vector3.zero, _durationRotate);
-        bolt.DOPath(new Vector3[] { point.position }, _durationMover, PathType.CatmullRom);
+        bolt.DOLocalPath(new Vector3[] { point }, _durationMover, PathType.CatmullRom);
     }
 }

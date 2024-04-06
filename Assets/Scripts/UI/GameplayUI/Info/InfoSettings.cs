@@ -15,6 +15,5 @@ public struct InfoSettings
     [field: SerializeField] public Localization Localization { get; private set; }
     
     [field: SerializeField] public AudioSource AudioSource { get; private set; }
-    [field: SerializeField] public List<Sprite> SpritesAudio { get; private set; }
-    [field: SerializeField] public Image ButtonIconSound { get; private set; }
+    [field: SerializeField] public List<GameObject> SpritesAudio { get; private set; }
 }

@@ -9,7 +9,7 @@ public class CompositeRootSettingsUI
     {
         _settings = new ButtonWindowOpening(info.ButtonSettings, info.SettingsScreen);
         _close = new ButtonClose(info.ButtonClose, info.SettingsScreen);
-        _music = new ButtonMusic(info.ButtonMusic, info.SpritesAudio, info.AudioSource, info.ButtonIconSound);
+        _music = new ButtonMusic(info.ButtonMusic, info.SpritesAudio, info.AudioSource);
         _localization = new DropdownLocalization(info.Dropdown, info.Localization);
     }
 

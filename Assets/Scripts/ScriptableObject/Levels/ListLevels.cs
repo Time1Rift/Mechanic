@@ -9,5 +9,5 @@ public class ListLevels : ScriptableObject
 
     public int CountLevels => Levels.Count;
 
-    public ConstructionPrefab GetConstruction(int number) => Levels.FirstOrDefault(item => item.Number == number).Construction;
+    public Figure GetConstruction(int number) => Levels.FirstOrDefault(item => item.Number == number).Construction;
 }

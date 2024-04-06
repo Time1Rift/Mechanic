@@ -34,11 +34,13 @@ public class Box : IBoltsDrawed
 
     private void CreatBolts()
     {
+        Bolt bolt;
+
         foreach (var item in _boltColumns)
         {
             while (item.Count < _countLines)
             {
-                Bolt bolt = _spawner.GetBolt();
+                bolt = _spawner.GetBolt();
                 bolt.Pressed += OnPressed;
                 item.AddBolt(bolt);
             }
