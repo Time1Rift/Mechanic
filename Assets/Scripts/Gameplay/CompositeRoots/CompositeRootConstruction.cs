@@ -9,6 +9,7 @@ public class CompositeRootConstruction : MonoBehaviour
 
     private ConstructionView _view;
     private Construction _construction;
+    private Figure _figure;
 
     private void Start()
     {
@@ -17,9 +18,9 @@ public class CompositeRootConstruction : MonoBehaviour
 
     public void Initialize()
     {
-        Figure prefab = GetPrefab();
-        _view = new ConstructionView(prefab.Preview, prefab.NumberText, _constructionViewInfo);
-        _construction = new Construction(prefab, _view);
+        ReceiveFigure();
+        _view = new ConstructionView(_figure.Preview, _figure.NumberText, _constructionViewInfo);
+        _construction = new Construction(_figure, _view);
     }
 
     public void Enable()
@@ -44,17 +45,19 @@ public class CompositeRootConstruction : MonoBehaviour
 
     private void OnUnsubscribe(Bolt bolt) => _construction.Unsubscribe(bolt);
 
-    private Figure GetPrefab()
+    private void ReceiveFigure()
     {
         PlayerDataSelectedLevel Levels = new PlayerDataSelectedLevel();
         int level = Levels.GetValue();
 
-        if(level > _listLevels.CountLevels)
+        if (level > _listLevels.CountLevels)
         {
             Levels.ResetLevel();
             level = Levels.GetValue();
         }
 
-        return Instantiate(_listLevels.GetConstruction(level), _positionConstruction);
+        Level newLevel = _listLevels.Levels[level];
+        _figure = Instantiate(newLevel.Figure, _positionConstruction);
+        _figure.Initialized(newLevel.NameFile);
     }
 }

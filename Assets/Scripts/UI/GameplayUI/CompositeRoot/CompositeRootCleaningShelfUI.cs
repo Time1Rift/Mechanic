@@ -6,9 +6,9 @@ public class CompositeRootCleaningShelfUI
 
     public CompositeRootCleaningShelfUI(InfoCleaningShelfUI info)
     {
-        _cleaningShel = new ButtonWindowOpening(info.ButtonCleaningShelf, info.CleaningShelfScreen);
-        _close = new ButtonClose(info.ButtonClose, info.CleaningShelfScreen);
-        _cleaningShelfCoins = new ButtonCleaningShelfCoins(info.ButtonCoins, info.CleaningShelfScreen);
+        _cleaningShel = new ButtonWindowOpening(info.ButtonCleaningShelf,info.AudioSource, info.CleaningShelfScreen);
+        _close = new ButtonClose(info.ButtonClose, info.AudioSource, info.CleaningShelfScreen);
+        _cleaningShelfCoins = new ButtonCleaningShelfCoins(info.ButtonCoins, info.AudioSource, info.CleaningShelfScreen);
     }
 
     public void Enable()

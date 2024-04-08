@@ -6,6 +6,8 @@ public class CompositeRootShelf : MonoBehaviour
     [SerializeField] private ShelfViewInfo _shelfViewInfo;
     [SerializeField] private BoltSpawner _spawner;
     [SerializeField] private Transform _shelTransform;
+    [SerializeField] private AudioSource _effectSoundCub;
+    [SerializeField] private AudioSource _folding;
     [SerializeField] private CompositeRootConstruction _construction;
     [SerializeField] private CompositeRootGameplayUI _buttonCleaningShelf;
 
@@ -17,7 +19,7 @@ public class CompositeRootShelf : MonoBehaviour
     public void Initialize()
     {
         _shelf = new Shelf(_spawner, _shelfInfo.MaxBolts);
-        _shelfView = new ShelfView(_shelfViewInfo, _shelTransform, _shelf);
+        _shelfView = new ShelfView(_shelfViewInfo, _shelTransform, _shelf, _effectSoundCub, _folding);
         _shelfInspector = new ShelfInspector(_shelfInfo.CountBoltsAddition, _shelfInfo.MaxBolts, _spawner.CountVarietyBolt);
         _shelfConnector = new ShelfConnector(_shelfInspector, _shelf, _shelfView);
     }

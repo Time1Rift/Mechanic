@@ -11,4 +11,5 @@ public struct InfoCleaningShelfUI
     [field: SerializeField] public Button ButtonClose { get; private set; }
     [field: SerializeField] public Button ButtonCoins { get; private set; }
     [field: SerializeField] public Button ButtonAdvertisement { get; private set; }
+    [field: SerializeField] public AudioSource AudioSource { get; private set; }
 }

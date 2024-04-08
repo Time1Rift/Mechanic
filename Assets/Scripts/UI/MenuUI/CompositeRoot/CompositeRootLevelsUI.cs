@@ -8,8 +8,8 @@ public class CompositeRootLevelsUI
 
     public CompositeRootLevelsUI(InfoLevelsUI info)
     {
-        _buttonShop = new ButtonWindowOpening(info.ButtonLevels, info.LevelsScreen);
-        _buttonClose = new ButtonClose(info.ButtonClose, info.LevelsScreen);
+        _buttonShop = new ButtonWindowOpening(info.ButtonLevels, info.AudioSource, info.LevelsScreen);
+        _buttonClose = new ButtonClose(info.ButtonClose, info.AudioSource, info.LevelsScreen);
         _listLevels = new ListLevelsUI(info.ListLevels, info.Spawner);
     }
 

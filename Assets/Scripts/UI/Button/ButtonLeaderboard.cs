@@ -1,16 +1,17 @@
 using Agava.YandexGames;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonLeaderboard : ButtonAbstract
+public class ButtonLeaderboard : AbstractButton
 {
     private YandexLeaderboard _yandexLeaderboard;
 
-    public ButtonLeaderboard(Button button, YandexLeaderboard yandexLeaderboard) : base(button) 
+    public ButtonLeaderboard(Button button, AudioSource audioSource, YandexLeaderboard yandexLeaderboard) : base(button, audioSource) 
     {
         _yandexLeaderboard = yandexLeaderboard;
     }
 
-    protected override void OnButtonClick()
+    protected override void Activate()
     {
         OpenLeaderboard();
     }

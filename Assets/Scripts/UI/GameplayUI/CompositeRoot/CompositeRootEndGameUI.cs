@@ -9,16 +9,20 @@ public class CompositeRootEndGameUI
     private ButtonExit _exitWin;
     private ButtonReboot _reboot;
     private ButtonExit _exitLose;
+    private AudioSource _winSound;
+    private AudioSource _loseSound;
 
-    public CompositeRootEndGameUI(InfoEndGameUI infoEndGameUI)
+    public CompositeRootEndGameUI(InfoEndGameUI info)
     {
-        _victoryScreen = infoEndGameUI.VictoryScreen;
-        _gameOverScreen = infoEndGameUI.GameOverScreen;
+        _victoryScreen = info.VictoryScreen;
+        _gameOverScreen = info.GameOverScreen;
+        _winSound = info.WinSound;
+        _loseSound = info.LoseSound;
 
-        _nextLevel = new ButtonNextLevel(infoEndGameUI.ButtonNextLevel);
-        _exitWin = new ButtonExit(infoEndGameUI.ButtonExitWin);
-        _reboot = new ButtonReboot(infoEndGameUI.ButtonReboot);
-        _exitLose = new ButtonExit(infoEndGameUI.ButtonExitLose);
+        _nextLevel = new ButtonNextLevel(info.ButtonNextLevel, info.ButtonSound);
+        _exitWin = new ButtonExit(info.ButtonExitWin, info.ButtonSound);
+        _reboot = new ButtonReboot(info.ButtonReboot, info.ButtonSound);
+        _exitLose = new ButtonExit(info.ButtonExitLose, info.ButtonSound);
 
         _victoryScreen.SetActive(false);
         _gameOverScreen.SetActive(false);
@@ -40,7 +44,15 @@ public class CompositeRootEndGameUI
         _exitLose.Disable();
     }
 
-    public void Win() => _victoryScreen.SetActive(true);
+    public void Win()
+    {
+        _winSound.Play();
+        _victoryScreen.SetActive(true);
+    }
 
-    public void Lose() => _gameOverScreen.SetActive(true);
+    public void Lose()
+    {
+        _loseSound.Play();
+        _gameOverScreen.SetActive(true);
+    }
 }

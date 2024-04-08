@@ -10,4 +10,5 @@ public struct InfoPauseUI
     [field: SerializeField] public Button ButtonExit { get; private set; }
     [field: SerializeField] public Button ButtonClose { get; private set; }
     [field: SerializeField] public Button ButtonReboot { get; private set; }
+    [field: SerializeField] public AudioSource AudioSource { get; private set; }
 }

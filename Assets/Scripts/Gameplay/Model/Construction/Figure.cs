@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
 using TMPro;
 using UnityEngine;
 
@@ -8,8 +6,8 @@ public class Figure : MonoBehaviour
 {
     [field: SerializeField] public Transform Preview { get; private set; }
     [field: SerializeField] public TextMeshProUGUI NumberText { get; private set; }
-    [SerializeField] private string _nameFile;
 
+    private string _nameFile;
     private int[,] _model;
     private Queue<Detail> _details = new();
     private Vector3 _positionOffset = Vector3.zero;
@@ -18,8 +16,9 @@ public class Figure : MonoBehaviour
     public int Count => _details.Count;
     public Transform Transform => _transform;
 
-    public void Initialized()
+    public void Initialized(string nameFile)
     {
+        _nameFile = nameFile;
         _transform = transform;
         ReadModel();
         AddDetails();
@@ -29,12 +28,15 @@ public class Figure : MonoBehaviour
 
     private void ReadModel()
     {
-        string[] newFile = File.ReadAllLines($"Assets/Figure/{_nameFile}.txt");
-        _model = new int[newFile[0].Length, newFile.Length];
+        char separatorSign = '\n';
+        TextAsset textAsset = Resources.Load<TextAsset>($"Figure/{_nameFile}");
+        string[] newFile = textAsset.text.Split(separatorSign);
+        _model = new int[newFile[0].Length - 1, newFile.Length];
 
         for (int x = 0; x < _model.GetLength(0); x++)
             for (int y = 0; y < _model.GetLength(1); y++)
-                _model[x, y] = int.Parse(newFile[x][y].ToString());
+                if (int.TryParse(newFile[x][y].ToString(), out int number))
+                    _model[x, y] = number;
     }
 
     private void AddDetails()

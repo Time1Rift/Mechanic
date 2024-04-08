@@ -9,8 +9,8 @@ public class CompositeRootShopUI
 
     public CompositeRootShopUI(InfoShopUI info)
     {
-        _buttonShop = new ButtonWindowOpening(info.ButtonShop, info.ShopScreen);
-        _buttonClose = new ButtonClose(info.ButtonClose, info.ShopScreen);
+        _buttonShop = new ButtonWindowOpening(info.ButtonShop, info.AudioSource, info.ShopScreen);
+        _buttonClose = new ButtonClose(info.ButtonClose, info.AudioSource, info.ShopScreen);
         Wallet wallet = new Wallet(info.WalletText);
         PurchasedCellShops purchasedCellShops = new PurchasedCellShops();
         _shelfActiveCubes = new ShelfActiveCubes(info.Bolts, info.ActiveCubes, purchasedCellShops);

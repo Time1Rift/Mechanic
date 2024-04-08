@@ -12,4 +12,7 @@ public struct InfoEndGameUI
     [field: SerializeField] public Button ButtonExitWin { get; private set; }
     [field: SerializeField] public Button ButtonReboot { get; private set; }
     [field: SerializeField] public Button ButtonExitLose { get; private set; }
+    [field: SerializeField] public AudioSource ButtonSound { get; private set; }
+    [field: SerializeField] public AudioSource WinSound { get; private set; }
+    [field: SerializeField] public AudioSource LoseSound { get; private set; }
 }

@@ -19,9 +19,10 @@ public class ShelfView
     private Queue<Bolt> _boltsMover = new();
     private Queue<Bolt> _boltsConnected = new();
     private int _countduplicates;
+    private AudioSource _effectSoundCub;
+    private AudioSource _folding;
 
-
-    public ShelfView(ShelfViewInfo shelfViewInfo, Transform transformShelf, Shelf shelf)
+    public ShelfView(ShelfViewInfo shelfViewInfo, Transform transformShelf, Shelf shelf, AudioSource effectSoundCub, AudioSource folding)
     {
         _durationMover = shelfViewInfo.DurationMover;
         _durationConnected = shelfViewInfo.DurationConnected;
@@ -30,6 +31,8 @@ public class ShelfView
         _maxScale = shelfViewInfo.MaxScale;
         _minScale = shelfViewInfo.MinScale;
         _shelf = shelf;
+        _effectSoundCub = effectSoundCub;
+        _folding = folding;
 
         SpawnPoints spawnPoints = new SpawnPoints();
         Transform[] points = spawnPoints.GetPoints(transformShelf, shelfViewInfo.Offset);
@@ -44,6 +47,7 @@ public class ShelfView
 
     public void MoverBolt(Bolt bolt)
     {
+        _effectSoundCub.Play();
         AddBolt(bolt);
         _boltsMover.Enqueue(bolt);
         bolt.Transform.DOLocalPath(new Vector3[] { Vector3.zero }, _durationMover, PathType.CatmullRom).OnComplete(SendEventMoved);
@@ -110,7 +114,10 @@ public class ShelfView
         _countduplicates--;
 
         if (_countduplicates == 0)
+        {
             Connected?.Invoke();
+            _folding.Play();
+        }
     }
 
     private void SendEventMoved() => Moved?.Invoke();

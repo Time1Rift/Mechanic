@@ -14,4 +14,5 @@ public struct InfoShopUI
     [field: SerializeField] public ListVarietyBolts Bolts { get; private set; }
     [field: SerializeField] public CellShopSpawner CellShopSpawner { get; private set; }
     [field: SerializeField] public List<ActiveCube> ActiveCubes { get; private set; }
+    [field: SerializeField] public AudioSource AudioSource { get; private set; }
 }

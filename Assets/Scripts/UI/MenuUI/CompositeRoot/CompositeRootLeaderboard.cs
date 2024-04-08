@@ -6,9 +6,9 @@ public class CompositeRootLeaderboard
 
     public CompositeRootLeaderboard(InfoLeaderboard info)
     {
-        _buttonWindowOpening = new ButtonWindowOpening(info.ButtonLeaderboard, info.LeaderboardScreen);
-        _buttonClose = new ButtonClose(info.ButtonClose, info.LeaderboardScreen);
-        _buttonLeaderboard = new ButtonLeaderboard(info.ButtonLeaderboard, info.YandexLeaderboard);
+        _buttonWindowOpening = new ButtonWindowOpening(info.ButtonLeaderboard, info.AudioSource, info.LeaderboardScreen);
+        _buttonClose = new ButtonClose(info.ButtonClose, info.AudioSource, info.LeaderboardScreen);
+        _buttonLeaderboard = new ButtonLeaderboard(info.ButtonLeaderboard, info.AudioSource, info.YandexLeaderboard);
     }
 
     public void Enable()

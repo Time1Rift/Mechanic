@@ -22,9 +22,9 @@ public class LevelUIPrefab : MonoBehaviour
         _play.Disable();
     }
 
-    public void Initialize(Level level)
+    public void Initialize(Level level, AudioSource audioSource)
     {
-        _play = new ButtonPlay(_buttonPlay, level.Number);
+        _play = new ButtonPlay(_buttonPlay, audioSource, level.Number);
         Level = level;
         _numberLevel.text = level.Number.ToString();
     }

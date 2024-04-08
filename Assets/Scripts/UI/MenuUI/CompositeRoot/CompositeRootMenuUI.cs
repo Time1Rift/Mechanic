@@ -22,6 +22,7 @@ public class CompositeRootMenuUI : MonoBehaviour
 
     private void Start()
     {
+        _settingsUI.Start();
         _shopUI.Start();
         _levelsUI.Start();
     }

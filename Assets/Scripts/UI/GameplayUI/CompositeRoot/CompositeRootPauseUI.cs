@@ -7,10 +7,10 @@ public class CompositeRootPauseUI
 
     public CompositeRootPauseUI(InfoPauseUI info)
     {
-        _pause = new ButtonWindowOpening(info.ButtonPause, info.PauseScreen);
-        _close = new ButtonClose(info.ButtonClose, info.PauseScreen);
-        _reboot = new ButtonReboot(info.ButtonReboot);
-        _exit = new ButtonExit(info.ButtonExit);
+        _pause = new ButtonWindowOpening(info.ButtonPause, info.AudioSource, info.PauseScreen);
+        _close = new ButtonClose(info.ButtonClose, info.AudioSource, info.PauseScreen);
+        _reboot = new ButtonReboot(info.ButtonReboot, info.AudioSource);
+        _exit = new ButtonExit(info.ButtonExit, info.AudioSource);
     }
 
     public void Enable()

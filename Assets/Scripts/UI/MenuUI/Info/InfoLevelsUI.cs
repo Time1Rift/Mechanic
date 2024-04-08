@@ -10,4 +10,5 @@ public struct InfoLevelsUI
     [field: SerializeField] public Button ButtonClose { get; private set; }
     [field: SerializeField] public ListLevels ListLevels { get; private set; }
     [field: SerializeField] public LevelUISpawner Spawner { get; private set; }
+    [field: SerializeField] public AudioSource AudioSource { get; private set; }
 }

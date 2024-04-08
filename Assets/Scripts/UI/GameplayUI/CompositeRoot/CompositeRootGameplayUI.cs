@@ -21,6 +21,11 @@ public class CompositeRootGameplayUI : MonoBehaviour
         _cleaningShelfUI = new CompositeRootCleaningShelfUI(_infoCleaningShelfUI);
     }
 
+    public void Start()
+    {
+        _settingsUI.Start();
+    }
+
     public void Enable()
     {
         _pauseUI.Enable();

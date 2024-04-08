@@ -2,11 +2,11 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonCleaningShelfCoins : ButtonAbstract, IPressed, IShelfCleared, IButtonCleaningShelfCoins
+public class ButtonCleaningShelfCoins : AbstractButton, IPressed, IShelfCleared, IButtonCleaningShelfCoins
 {
     private GameObject _window;
 
-    public ButtonCleaningShelfCoins(Button button, GameObject window) : base(button)
+    public ButtonCleaningShelfCoins(Button button, AudioSource audioSource, GameObject window) : base(button, audioSource)
     {
         _window = window;
     }
@@ -22,7 +22,7 @@ public class ButtonCleaningShelfCoins : ButtonAbstract, IPressed, IShelfCleared,
         ShelfCleared?.Invoke();
     }
 
-    protected override void OnButtonClick()
+    protected override void Activate()
     {
         TriedPay?.Invoke(this);
     }

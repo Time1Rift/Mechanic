@@ -13,7 +13,6 @@ public class Construction : IWin, IFigured
     public Construction(Figure figure, ConstructionView view)
     {
         _figure = figure;
-        _figure.Initialized();
         _view = view;
     }
 
