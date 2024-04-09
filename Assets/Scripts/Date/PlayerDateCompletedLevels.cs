@@ -1,4 +1,7 @@
 using UnityEngine;
+#if UNITY_WEBGL && !UNITY_EDITOR
+using PlayerPrefs = Agava.YandexGames.Utility.PlayerPrefs;
+#endif
 
 public class PlayerDateCompletedLevels
 {
@@ -12,7 +15,11 @@ public class PlayerDateCompletedLevels
 
     public int GetValue() => PlayerPrefs.GetInt(NameFile);
 
-    public void SetValue(int value) => PlayerPrefs.SetInt(NameFile, value);
+    public void SetValue(int value)
+    {
+        PlayerPrefs.SetInt(NameFile, value);
+        PlayerPrefs.Save();
+    }
 
-    public void AddValue() => PlayerPrefs.SetInt(NameFile, (GetValue() + 1));
+    public void AddValue() => SetValue((GetValue() + 1));
 }

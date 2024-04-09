@@ -1,4 +1,7 @@
 using UnityEngine;
+#if UNITY_WEBGL && !UNITY_EDITOR
+using PlayerPrefs = Agava.YandexGames.Utility.PlayerPrefs;
+#endif
 
 public class PlayerDataSelectedLevel
 {
@@ -12,9 +15,13 @@ public class PlayerDataSelectedLevel
 
     public int GetValue() => PlayerPrefs.GetInt(NameFile);
 
-    public void SetValue(int value) => PlayerPrefs.SetInt(NameFile, value);
+    public void SetValue(int value)
+    {
+        PlayerPrefs.SetInt(NameFile, value);
+        PlayerPrefs.Save();
+    }
 
-    public void NextValue() => PlayerPrefs.SetInt(NameFile, (GetValue() + 1));
+    public void NextValue() => SetValue((GetValue() + 1));
 
-    public void ResetLevel() => PlayerPrefs.SetInt(NameFile, 1);
+    public void ResetLevel() => SetValue(1);
 }

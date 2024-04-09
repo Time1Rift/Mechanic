@@ -11,6 +11,8 @@ public class CellShop : MonoBehaviour
     [SerializeField] private Button _sellButton;
     [SerializeField] private Button _selectionButton;
 
+    private AudioSource _audioSource;
+
     public VarietyBolt VarietyBolt { get; private set; }
 
     public event Action<CellShop, VarietyBolt> SellButtonClick;
@@ -36,12 +38,21 @@ public class CellShop : MonoBehaviour
 
     public void DisableLock() => _lock.SetActive(false);
 
-    public void EnableSelectionButton() => _selectionButton.gameObject.SetActive(true);
-
-    public void DisableSelectionButton() => _selectionButton.gameObject.SetActive(false);
-
-    public void Render(VarietyBolt varietyBolt)
+    public void EnableSelectionButton()
     {
+        _audioSource.Play();
+        _selectionButton.gameObject.SetActive(true);
+    }
+
+    public void DisableSelectionButton()
+    {
+        _audioSource.Play();
+        _selectionButton.gameObject.SetActive(false);
+    }
+
+    public void Render(VarietyBolt varietyBolt, AudioSource audioSource)
+    {
+        _audioSource = audioSource;
         VarietyBolt = varietyBolt;
         _icon.sprite = varietyBolt.Icon;
         _priceText.text = varietyBolt.Price.ToString();
@@ -53,5 +64,9 @@ public class CellShop : MonoBehaviour
         SelectionButtonClick?.Invoke(VarietyBolt);
     }
 
-    private void OnSellButtonClick() => SellButtonClick?.Invoke(this, VarietyBolt);
+    private void OnSellButtonClick()
+    {
+        _audioSource.Play();
+        SellButtonClick?.Invoke(this, VarietyBolt);
+    }
 }

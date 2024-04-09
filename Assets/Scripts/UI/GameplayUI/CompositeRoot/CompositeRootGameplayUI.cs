@@ -44,7 +44,7 @@ public class CompositeRootGameplayUI : MonoBehaviour
 
     public IPressed[] Subscribe() => _settingsUI.Subscribe().Concat(_pauseUI.Subscribe()).Concat(_cleaningShelfUI.Subscribe()).ToArray();
 
-    public IShelfCleared ClearShelf() => _cleaningShelfUI.ClearShelf();
+    public IShelfCleared[] ClearShelf() => _cleaningShelfUI.ClearShelf();
 
     public IButtonCleaningShelfCoins Pay() => _cleaningShelfUI.Pay();
 

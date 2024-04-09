@@ -4,10 +4,12 @@ using UnityEngine.UI;
 
 public class ButtonLeaderboard : AbstractButton
 {
+    private GameObject _window;
     private YandexLeaderboard _yandexLeaderboard;
 
-    public ButtonLeaderboard(Button button, AudioSource audioSource, YandexLeaderboard yandexLeaderboard) : base(button, audioSource) 
+    public ButtonLeaderboard(Button button, AudioSource audioSource, YandexLeaderboard yandexLeaderboard, GameObject window) : base(button, audioSource) 
     {
+        _window = window;
         _yandexLeaderboard = yandexLeaderboard;
     }
 
@@ -22,6 +24,7 @@ public class ButtonLeaderboard : AbstractButton
 
         if (PlayerAccount.IsAuthorized)
         {
+            _window.SetActive(true);
             PlayerAccount.RequestPersonalProfileDataPermission();
             _yandexLeaderboard.Fill();
         }

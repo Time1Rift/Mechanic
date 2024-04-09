@@ -31,7 +31,7 @@ public class Figure : MonoBehaviour
         char separatorSign = '\n';
         TextAsset textAsset = Resources.Load<TextAsset>($"Figure/{_nameFile}");
         string[] newFile = textAsset.text.Split(separatorSign);
-        _model = new int[newFile[0].Length - 1, newFile.Length];
+        _model = new int[newFile.Length, newFile[0].Length - 1];
 
         for (int x = 0; x < _model.GetLength(0); x++)
             for (int y = 0; y < _model.GetLength(1); y++)
@@ -47,7 +47,7 @@ public class Figure : MonoBehaviour
 
             for (int y = 0; y < _model.GetLength(1); y++)
             {
-                if(_model[x, y] != 0)
+                if (_model[x, y] != 0)
                     detal.AddPartDetail(_model[x, y], _positionOffset);
 
                 _positionOffset += Vector3.right;

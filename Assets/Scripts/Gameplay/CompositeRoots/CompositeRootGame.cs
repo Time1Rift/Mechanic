@@ -30,6 +30,7 @@ public class CompositeRootGame : MonoBehaviour
 
     private void OnWin()
     {
+        _coins.AddCoins();
         UpdateData();
         _gameplayUI.Win();
         OnPressed(false);
@@ -49,8 +50,7 @@ public class CompositeRootGame : MonoBehaviour
     }
 
     private void UpdateData()
-    {
-        _coins.AddCoins();
+    {        
         new PlayerDateCompletedLevels().AddValue();
         PlayerDataMaxAvailableLevel maxAvailableLevel = new PlayerDataMaxAvailableLevel();
 

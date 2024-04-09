@@ -1,4 +1,7 @@
 using UnityEngine;
+#if UNITY_WEBGL && !UNITY_EDITOR
+using PlayerPrefs = Agava.YandexGames.Utility.PlayerPrefs;
+#endif
 
 public abstract class AbstractPlayerDataAudio
 {
@@ -14,7 +17,11 @@ public abstract class AbstractPlayerDataAudio
 
     public bool GetValue() => PlayerPrefs.GetInt(NameFile) == 1 ? true : false;
 
-    public void SetValue(bool value) => PlayerPrefs.SetInt(NameFile, (value == true ? 1 : 0));
+    public void SetValue(bool value)
+    {
+        PlayerPrefs.SetInt(NameFile, (value == true ? 1 : 0));
+        PlayerPrefs.Save();
+    }
 
     protected abstract string ChangeNameFile();
 }

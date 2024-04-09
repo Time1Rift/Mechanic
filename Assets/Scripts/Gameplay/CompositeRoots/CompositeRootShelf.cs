@@ -30,7 +30,9 @@ public class CompositeRootShelf : MonoBehaviour
         _spawner.Unsubscribed += OnUnsubscribe;
         _construction.SubscribeFigured().ItemReceived += OnItemReceived;
         _shelfConnector.Enable();
-        _buttonCleaningShelf.ClearShelf().ShelfCleared += OnClearShelf;
+
+        foreach (var item in _buttonCleaningShelf.ClearShelf())
+            item.ShelfCleared += OnClearShelf;
     }    
 
     public void Disable()
@@ -39,7 +41,9 @@ public class CompositeRootShelf : MonoBehaviour
         _spawner.Unsubscribed -= OnUnsubscribe;
         _construction.SubscribeFigured().ItemReceived -= OnItemReceived;
         _shelfConnector.Disable();
-        _buttonCleaningShelf.ClearShelf().ShelfCleared -= OnClearShelf;
+
+        foreach (var item in _buttonCleaningShelf.ClearShelf())
+            item.ShelfCleared -= OnClearShelf;
     }
 
     public ILosed GetILosed() => _shelfConnector;

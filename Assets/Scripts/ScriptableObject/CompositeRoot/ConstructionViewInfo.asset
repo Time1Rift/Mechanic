@@ -16,4 +16,4 @@ MonoBehaviour:
   <MoveDuration>k__BackingField: 0.3
   <DurationRotate>k__BackingField: 0.5
   <CameraIndentation>k__BackingField: {x: 0, y: -5, z: -16}
-  <SesignReviewPosition>k__BackingField: {x: 10, y: -10, z: -26}
+  <SesignReviewPosition>k__BackingField: {x: 5, y: -10, z: -26}

@@ -55,8 +55,8 @@ public class CompositeRootConstruction : MonoBehaviour
             Levels.ResetLevel();
             level = Levels.GetValue();
         }
-
-        Level newLevel = _listLevels.Levels[level];
+        
+        Level newLevel = _listLevels.Levels[level - 1];
         _figure = Instantiate(newLevel.Figure, _positionConstruction);
         _figure.Initialized(newLevel.NameFile);
     }

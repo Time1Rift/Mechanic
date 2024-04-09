@@ -1,4 +1,7 @@
 using UnityEngine;
+#if UNITY_WEBGL && !UNITY_EDITOR
+using PlayerPrefs = Agava.YandexGames.Utility.PlayerPrefs;
+#endif
 
 public class PlayerDataMaxAvailableLevel
 {
@@ -12,5 +15,9 @@ public class PlayerDataMaxAvailableLevel
 
     public int GetValue() => PlayerPrefs.GetInt(NameFile);
 
-    public void NextValue() => PlayerPrefs.SetInt(NameFile, (GetValue() + 1));
+    public void NextValue()
+    {
+        PlayerPrefs.SetInt(NameFile, (GetValue() + 1));
+        PlayerPrefs.Save();
+    }
 }

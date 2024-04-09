@@ -24,5 +24,9 @@ public class PlayerDataScene : MonoBehaviour
 
     private int GetValue() => PlayerPrefs.GetInt(NameFile);
 
-    private void SetValue() => PlayerPrefs.SetInt(NameFile, SceneManager.GetActiveScene().buildIndex);
+    private void SetValue()
+    {
+        PlayerPrefs.SetInt(NameFile, SceneManager.GetActiveScene().buildIndex);
+        PlayerPrefs.Save();
+    }
 }

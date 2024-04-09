@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+#if UNITY_WEBGL && !UNITY_EDITOR
+using PlayerPrefs = Agava.YandexGames.Utility.PlayerPrefs;
+#endif
 
 public abstract class AbstractPlayerDataString
 {

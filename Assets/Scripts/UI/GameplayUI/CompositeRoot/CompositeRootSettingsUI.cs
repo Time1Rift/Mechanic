@@ -11,7 +11,6 @@ public class CompositeRootSettingsUI
         _close = new ButtonClose(info.ButtonClose, info.ButtonSound, info.SettingsScreen);
         _music = new ButtonMusic(info.ButtonMusic, info.ButtonSound, info.SpritesMusic, info.Mixer, new PlayerDataMusic());
         _sound = new ButtonEffectSound(info.ButtonEffectSound, info.ButtonSound, info.SpritesEffectSound, info.Mixer, new PlayerDataEffectSound());
-        new DropdownLocalization(info.Dropdown, info.Localization);
     }
 
     public void Start()

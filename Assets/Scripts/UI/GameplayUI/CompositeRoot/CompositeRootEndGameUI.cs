@@ -3,8 +3,7 @@ using UnityEngine;
 public class CompositeRootEndGameUI
 {
     private GameObject _victoryScreen;
-    private GameObject _gameOverScreen;
-     
+    private GameObject _gameOverScreen;     
     private ButtonNextLevel _nextLevel;
     private ButtonExit _exitWin;
     private ButtonReboot _reboot;

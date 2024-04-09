@@ -12,15 +12,29 @@ public abstract class AbstractButton
         _audioSource = audioSource;
     }
 
-    public void Enabled() => _button.onClick.AddListener(OnButtonClick);
+    public void Enabled()
+    {
+        _button.onClick.AddListener(OnButtonClick);
+        AddEnabled();
+    }
 
-    public void Disable() => _button.onClick.RemoveListener(OnButtonClick);
+    public void Disable()
+    {
+        _button.onClick.RemoveListener(OnButtonClick);
+        AddDisable();
+    }
 
     private void OnButtonClick()
     {
-        _audioSource.Play();
+        if (_audioSource != null)
+            _audioSource.Play();
+
         Activate();
     }
+
+    protected virtual void AddEnabled() { }
+
+    protected virtual void AddDisable() { }
 
     protected abstract void Activate();
 }
