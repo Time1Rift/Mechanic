@@ -5,7 +5,7 @@ using UnityEngine;
 public class TimerInterstitialAd : MonoBehaviour
 {
     [SerializeField, Min(0)] private int _delay = 180;
-    [SerializeField, Min(0f)] private float _delayWarning = 1.3f;
+    [SerializeField, Min(0f)] private float _delayWarning = 1.1f;
     [SerializeField] private GameObject _warning;
     [SerializeField] private TextMeshProUGUI _textNumber;
     [SerializeField, Min(0)] private int _counter = 3;
