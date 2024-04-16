@@ -15,6 +15,7 @@ public class Figure : MonoBehaviour
 
     public int Count => _details.Count;
     public Transform Transform => _transform;
+    public Vector3 CentralPosition { get; private set; }
 
     public void Initialized(string nameFile)
     {
@@ -41,6 +42,9 @@ public class Figure : MonoBehaviour
 
     private void AddDetails()
     {
+        int indexX = (_model.GetLength(0) / 2) - 1;
+        int indexY = (_model.GetLength(1) / 2) - 1;
+
         for (int x = 0; x < _model.GetLength(0); x++)
         {
             Detail detal = new Detail();
@@ -49,6 +53,9 @@ public class Figure : MonoBehaviour
             {
                 if (_model[x, y] != 0)
                     detal.AddPartDetail(_model[x, y], _positionOffset);
+
+                if (x == indexX && y == indexY)
+                    CentralPosition = _positionOffset;
 
                 _positionOffset += Vector3.right;
             }

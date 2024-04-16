@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80dc85cc0a6b3a14189c963aa170e15a, type: 3}
-  m_Name: 1
+  m_Name: 6
   m_EditorClassIdentifier: 
-  <Number>k__BackingField: 1
-  <NameFile>k__BackingField: pacman
+  <Number>k__BackingField: 6
+  <NameFile>k__BackingField: cactus
   <Figure>k__BackingField: {fileID: 4010194695134238142, guid: 3dfb8ace30796594cb34369e81d8175b, type: 3}

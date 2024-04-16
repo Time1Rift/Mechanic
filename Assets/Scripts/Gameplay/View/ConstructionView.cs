@@ -14,11 +14,13 @@ public class ConstructionView
     private Vector3 _sesignReviewPosition;
     private Vector3 _curentPosition;
     private float _durationRotate;
+    private Vector3 _centralPosition;
 
-    public ConstructionView(Transform preview, TextMeshProUGUI text, ConstructionViewInfo _constructionViewInfo)
+    public ConstructionView(Figure figure, ConstructionViewInfo _constructionViewInfo)
     {
-        _preview = preview;
-        _numberText = text;
+        _preview = figure.Preview;
+        _numberText = figure.NumberText;
+        _centralPosition = figure.CentralPosition;
         _durationMover = _constructionViewInfo.DurationMover;
         _cameraIndentation = _constructionViewInfo.CameraIndentation;
         _moveDuration = _constructionViewInfo.MoveDuration;
@@ -30,9 +32,19 @@ public class ConstructionView
     public void ShowEntireStructure(bool isWorking)
     {
         if (isWorking)
+        {
             _transformCamera.DOMove(_curentPosition, _moveDuration).SetDelay(_moveDuration);
+        }
         else
-            _transformCamera.DOMove(_sesignReviewPosition, _moveDuration).SetDelay(_moveDuration);
+        {
+            Vector3 position = new Vector3
+                (
+                _centralPosition.x,
+                _centralPosition.y * _sesignReviewPosition.y,
+                _centralPosition.x * _sesignReviewPosition.z
+                );
+            _transformCamera.DOMove(position, _moveDuration).SetDelay(_moveDuration);
+        }
     }
 
     public void RemovePreview() => _preview.gameObject.SetActive(false);

@@ -19,7 +19,7 @@ public class CompositeRootConstruction : MonoBehaviour
     public void Initialize()
     {
         ReceiveFigure();
-        _view = new ConstructionView(_figure.Preview, _figure.NumberText, _constructionViewInfo);
+        _view = new ConstructionView(_figure, _constructionViewInfo);
         _construction = new Construction(_figure, _view);
     }
 
