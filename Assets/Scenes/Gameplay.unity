@@ -3576,10 +3576,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1960137911}
     m_Modifications:
+    - target: {fileID: 597141377840217571, guid: 592f28600d269e2428a255f10857a189, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 124.668
+      objectReference: {fileID: 0}
+    - target: {fileID: 597141377840217571, guid: 592f28600d269e2428a255f10857a189, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 349.035
+      objectReference: {fileID: 0}
+    - target: {fileID: 597141377840217571, guid: 592f28600d269e2428a255f10857a189, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 152.51196
+      objectReference: {fileID: 0}
+    - target: {fileID: 597141377840217571, guid: 592f28600d269e2428a255f10857a189, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -243.53699
+      objectReference: {fileID: 0}
     - target: {fileID: 770417827899857767, guid: 592f28600d269e2428a255f10857a189, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 770417827899857767, guid: 592f28600d269e2428a255f10857a189, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2294515492350009342, guid: 592f28600d269e2428a255f10857a189, type: 3}
       propertyPath: m_Name
       value: Canvas Button
@@ -3773,6 +3793,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 7580712934663597157, guid: dd68d5a85f63eeb42a6d44c2dcc342c6, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8262523106340343712, guid: dd68d5a85f63eeb42a6d44c2dcc342c6, type: 3}
       propertyPath: m_Name
       value: Canvas Screns
